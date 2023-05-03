@@ -25,6 +25,7 @@ plotVolcano <- function(ProtPepCounts = ag.pepN, ProtStats=ProtStats, PeporProt,
   abline(v=-log(FCcutoff))
   abline(h=-log(pvalcutoff))
   dev.off()
+<<<<<<< HEAD
 }#' The Volcano plot function for all APAF scripts
 #'
 #' @param ProtPepCounts ProteinName, NumberofPeptides
@@ -52,4 +53,6 @@ plotVolcano <- function(ProtPepCounts = ag.pepN, ProtStats=ProtStats, PeporProt,
   abline(v=-log(FCcutoff))
   abline(h=-log(pvalcutoff))
   dev.off()
+=======
+>>>>>>> fa008a906a5bf777c33ee18adbd35e63ddd69098
 }

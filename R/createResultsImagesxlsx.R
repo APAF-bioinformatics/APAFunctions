@@ -20,4 +20,8 @@ createResultsImagexlsx <- function(){
     try(insertImage(wb, img, ImageNames[img], startRow = 5,  startCol = 2, width=8, height=8))
   }
   openxlsx::saveWorkbook(wb, file="Results_Images.xlsx",  overwrite=T)
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fa008a906a5bf777c33ee18adbd35e63ddd69098

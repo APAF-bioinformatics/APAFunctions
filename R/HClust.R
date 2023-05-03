@@ -65,6 +65,7 @@ HClust <- function (data = data, metric = c("euclidean", "manhattan", "pearsonCo
     list(clustID = clustID, clustres = clustres, method = method, 
          metric = metric)
 }
+<<<<<<< HEAD
 #' Clustering method. TO DO -- document later 
 #'
 #' @param data 
@@ -132,3 +133,5 @@ HClust <- function (data = data, metric = c("euclidean", "manhattan", "pearsonCo
     list(clustID = clustID, clustres = clustres, method = method, 
          metric = metric)
 }
+=======
+>>>>>>> fa008a906a5bf777c33ee18adbd35e63ddd69098
