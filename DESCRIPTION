@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Jemma Wu, Dana Pascovici, Geraldine Sullivan, Keiran Rowell
 Maintainer: The APAF bioinformatics team  <bioinformatics.apaf@mq.edu.au>
 Description: A series of analysis and plotting functions common the the APAF proteomics R code.
-    Most function provide a wrapper to base R code to make data extraction and plotting easier.
+    Several functions provide a wrapper to base R code to make data extraction and plotting easier.
     Currently these functions are used for SWATH and TMT experiments.
 License: GPLv3
 Encoding: UTF-8
