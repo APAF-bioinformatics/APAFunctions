@@ -22,5 +22,36 @@ createResultsxlsx <- function(exp = c("SWATH, TMT"), list = inputlist){ #Current
     openxlsx::saveWorkbook(wb, file="Results.xlsx",  overwrite=T)
   } else if (exp == "TMT") {
     print("Nothing quite yet")
+
+    # wb <- createWorkbook()
+    # full.res[full.res=='NaN'] = NA
+    #
+    # # add parameter cutoffs
+    # dat.para <- data.frame(Parameter=c('P value', 'Fold change', 'Clean', 'FileName', 'DesignFile', 'Date'),
+    #                        Cutoff=c(pvalcutoff, FCCutoff, as.character(Clean), basename(filename),
+    #                                 basename(designfile), date()))
+    # APAFunctions::printxlsInfoSheet(wb, 'InputParameters', dat.para)
+    #
+    # ps <- try(printxlsxDataSheet(data = full.res, FCcol=grep("MaxFC", names(full.res)),
+    #                              pvalcol=c(grep("Anova", names(full.res))),
+    #                              wb = wb,
+    #                              tabName = "AllData", hiCutoff=FCCutoff, lowCutoff=1/FCCutoff, pvalCutoff=pvalcutoff) )
+    #
+    # if(inherits(ps, 'try-error') ) warning('Error with print overall xlsx file')
+    #
+    # ps <- try(printxlsInfoSheet(wb, tabName = "PCAScores", file = data.frame(rownames(pca.res$componentScores),pca.res$componentScores)))
+    #
+    # if(inherits(ps, 'try-error') ) warning('Error with print overall PCA component scores tab')
+    #
+    # ps <- try(printxlsInfoSheet(wb, tabName = "PCALoadings", file = data.frame(rownames(ld), ld)))
+    #
+    # if(inherits(ps, 'try-error') ) warning('Error with print overall PCA loading tab')
+    #
+    # ps <- try(printxlsInfoSheet(wb, tabName = "SampleGroup", file = dat.samplegroup))
+    #
+    # if(inherits(ps, 'try-error') ) warning('Error with print sample group tab')
+    #
+    # saveWorkbook(wb, file="ResultsOverall.xlsx", overwrite=TRUE)
+
   }
 }
