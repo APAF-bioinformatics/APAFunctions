@@ -7,15 +7,15 @@
 
 createResultsxlsx <- function(res.list, Anova.table, design, comps){ #Currently no defaults, you must supply all. Can change to arg=arg defaults later
   wb <- openxlsx::createWorkbook("Results.xlsx")
-  printxlsxExplanationSheet(wb, tabName = "Key")
+  printxlsInfoSheet(wb, tabName = "Key")
   for (i in 1:length(res.list)) {
-    printxlsxDataSheet(data = res.list[[i]], FCcol = grep("FC", names(res.list[[i]])), pvalcol = grep("pval", tolower(names(res.list[[i]]))), wb, tabName=comps[i,1])
+    printDataSheet(data = res.list[[i]], FCcol = grep("FC", names(res.list[[i]])), pvalcol = grep("pval", tolower(names(res.list[[i]]))), wb, tabName=comps[i,1])
   }
-  printxlsxDataSheet(Anova.table, FCcol = grep("MaxFC", names(Anova.table)),pvalcol = grep("Anova", names(Anova.table))[1:2], wb, tabName="AllProteinsNorm")
-  printxlsxExplanationSheet(wb, "Design", design)
-  printxlsxExplanationSheet(wb, "Comparisons", comps)
+  printDataSheet(Anova.table, FCcol = grep("MaxFC", names(Anova.table)),pvalcol = grep("Anova", names(Anova.table))[1:2], wb, tabName="AllProteinsNorm")
+  printxlsInfoSheet(wb, "Design", design)
+  printxlsInfoSheet(wb, "Comparisons", comps)
   params <- data.frame(Parameters = c("Normalization", "Fold change cutoff", "P-value cutoff", 'FileName', 'DesignFile', 'Date'), Values = c(normalization, FCcutoff, pvalcutoff, basename(filename), basename(designfile), date()))
-  printxlsxExplanationSheet(wb, "InputParameters", params)
+  printxlsInfoSheet(wb, "InputParameters", params)
   openxlsx::saveWorkbook(wb, file="Results.xlsx",  overwrite=T)
   for (s in 1:length(getSheetNames("Results.xlsx"))) {
     setColWidths(wb, sheet = s, cols = 1:25, widths = "auto")
