@@ -4,7 +4,7 @@
 \alias{createResultsImagexlsx}
 \title{Creates an Excel workbook with each image and a description. Doesn't require any arguments -- creating this workbook is self-contained}
 \usage{
-createResultsImagexlsx()
+createResultsImagexlsx(exp = c("SWATH", "TMT"))
 }
 \description{
 Creates an Excel workbook with each image and a description. Doesn't require any arguments -- creating this workbook is self-contained
