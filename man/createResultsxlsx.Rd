@@ -4,16 +4,12 @@
 \alias{createResultsxlsx}
 \title{Creates an Excel workbook all results. Later it should format based upon experiment. TO DO: parameter values like normalization etc should be passed in}
 \usage{
-createResultsxlsx(res.list, Anova.table, design, comps)
+createResultsxlsx(exp = c("SWATH, TMT"), list = inputlist)
 }
 \arguments{
-\item{res.list}{List containing every results dataframe}
+\item{exp}{Either SWATH or TMT}
 
-\item{Anova.table}{Dataframe that contains the ANOVA results}
-
-\item{design}{Experimental design file}
-
-\item{comps}{Comparison between groups}
+\item{list}{A list of data frames containing data for excel output tabs}
 }
 \description{
 Creates an Excel workbook all results. Later it should format based upon experiment. TO DO: parameter values like normalization etc should be passed in
