@@ -58,5 +58,5 @@ TMT_normalisation <- function(SampleLoadNorm){
   #########
   # END IRS
   ########
-  return(list(data_sl, data_irs))
+  return(list(data_sl=data_sl, data_irs=data_irs))
 }
