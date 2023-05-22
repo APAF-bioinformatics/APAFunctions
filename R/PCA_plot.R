@@ -6,9 +6,10 @@
 #' @param Group Group information for each column from PCA_calc() input (usually prot.ag). No replicate information.
 library(scatterplot3d) # KR - Can this be done in ggplot2?
 
-PCA_plot <- function(exp, pca.res, Group, data=NULL){
+PCA_plot <- function(exp, pca.res, data, Group){
   grp_colors = rainbow(nlevels(Group))
   z <- pca.res$componentScores
+
   if (exp == "SWATH"){
     png("PCA3D.png", 2000, 2000, res=300)
     plot(cloud(z[, 1] ~ z[, 3] + z[, 2], groups = as.factor(labelValue),
@@ -34,7 +35,7 @@ PCA_plot <- function(exp, pca.res, Group, data=NULL){
     props = round(100*pca.res$summary$importance[2,1:3], 1)# proportion of variance of the top 3 components
 
     png("PCA3dPlot.png", 2000, 2000, res=300)
-    s3d <- scatterplot3d(z[,1:3], color = grp_colors[Group], col.axis=gray(0.85), col.grid="lightblue", box = T, angle = 26, pch=20)
+    s3d <- scatterplot3d(z[,1:3], color=grp_colors[Group], col.axis=gray(0.85), col.grid="lightblue", box = T, angle = 26, pch=20)
     s3d$points3d(z[,1:3], pch=21)
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group), cex=.8)
     text(s3d$xyz.convert(3+z[,1], 3+z[,2], z[,3]), labels = colnames(data), cex=0.4)

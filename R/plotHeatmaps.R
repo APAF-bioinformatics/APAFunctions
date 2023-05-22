@@ -9,15 +9,23 @@
 #'
 library(heatmap3)
 
-plotHeatmaps <- function(exp, Group, data, dist, Anova.idx=NULL, useAnova=FALSE){ # A clever solution would probably lose a few lines below.. Moving on.
+plotHeatmaps <- function(exp, data, Group, dist, Anova.idx=NULL, useAnova=FALSE){ # A clever solution would probably lose a few lines below.. Moving on.
 grp_colors = rainbow(nlevels(Group))
  if (exp == "TMT") {
+    if (useAnova==FALSE) {
     heatmap3(cor(log(na.omit(data+.5)), use="pairwise.complete.obs"), #distfun=cordist,
              col=colorRampPalette(c("green","black", "red"))(1024),
              main="IRS correlation",
-             colsideColors=rainbow(nlevels(Group))[Group], margins=c(10,10))
+             grp_colsideColors=rainbow(nlevels(Group))[Group], margins=c(10,10))
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group), xpd=TRUE, cex=.6)
     png("Correlation heatmap IRS.png", 2000, 2000,res=300)
+    }
+   else if (useAnova==TRUE) {
+      if(nrow(data_irs[Anova.idx,]) > 3) {
+        png("Heatmap - Anova DE.png", 2000, 2000, res=300)
+        hm1 <- heatmap3(as.matrix(na.omit(log(data[Anova.idx,]+.5))), margins=c(15,15), cexRow=1, col=colorRampPalette(c("green", "black", "red"))(120), grp_colorsideColors=grp_colors[Group])
+        legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group), xpd=TRUE,cex=.6 )
+   }
   } else if (exp == "SWATH") {
     ## GERI: turned off row labels as they were just row numbers and gave no information
     if (useAnova == TRUE){

@@ -1,13 +1,13 @@
 #' Compute PCA, no plots
 #'
-#' @param data The prot.ag dataframe. Long format intensity? data with protein name as first column.
 #' @param exp experiment: either SWATH or TMT
+#' @param data The prot.ag dataframe. Long format intensity? data with protein name as first column.
 #' @param scaleR TO BE DETERMINED - leave as FALSE as on GenePattern - manual row scaling?
 #' @param scaleC Pass scaling argument to prcomp function for PCA. Default TRUE.
 #' @param k Number of components to compute. Defaults to number of variables - 1.
 #'
-#' @return The components of the PCA that are labelled for easy plotting 
-PCA_calc <- function (data, exp = c("SWATH", "TMT"), scaleR = FALSE, scaleC = TRUE, k = min(dim(data)) - 2) {
+#' @return The components of the PCA that are labelled for easy plotting
+PCA_calc <- function (exp=c("SWATH", "TMT"), data, scaleR=FALSE, scaleC=TRUE, k=min(dim(data))-2) {
   if (exp == "TMT") {
     k = k+1
     if (k > min(dim(data) - 1))
@@ -24,12 +24,11 @@ PCA_calc <- function (data, exp = c("SWATH", "TMT"), scaleR = FALSE, scaleC = TR
     row.nrm <- pmax(row.nrm, 1e-04)
     data <- sweep(data, 1, row.nrm, FUN = "/")
   }
-  result <- try(prcomp(data, retx = TRUE, scale = scaleC), 
+  result <- try(prcomp(data, retx = TRUE, scale = scaleC),
                 silent = FALSE)
-  if (inherits(result, "try-error")) 
+  if (inherits(result, "try-error"))
     stop("Failed to Calculate Principal Components")
-  components <- list(componentVariances = (result$sdev^2)[1:k], 
-                     componentScores = result$x[, 1:k], componentLoadings = result$rotation[, 
-                                                                                            1:k], summary = summary(result))
+  components <- list(componentVariances = (result$sdev^2)[1:k],
+                     componentScores = result$x[, 1:k], componentLoadings = result$rotation[, 1:k], summary = summary(result))
   return(components)
 }

@@ -2,7 +2,7 @@
 #'
 #' @param data_raw The un-normalised raw ion data matrix, as a list
 #' @param SampleLoadNorm comes from the --SampleLoadNorm flag and decfaults to "total"
-#' @return data_irs. This used for all later ion data in TMT at the moment. It shouldn't be called data_irs. It should be data_processed
+#' @return data_ls and data_irs in a list. This used for all later ion data in TMT at the moment. It shouldn't be called data_irs. It should be data_processed
 TMT_normalisation <- function(data, SampleLoadNorm){
   ### KR - to eventually be merged within and all-encompassing APAFunctions::normalize()
   # TO DO: Leave a skeleton structure for a place to add other normalisation functions (probably from external packages.)
