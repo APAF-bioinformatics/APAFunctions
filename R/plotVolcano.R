@@ -18,11 +18,11 @@ plotVolcano <- function(exp, FC, pval, counts, PeporProt, comp.idx, FCCutoff=1.5
     colorspace <- colorintens[as.numeric(counts)]
 
     if (PeporProt == "Protein"){
-      png(paste(C,"VolcanoProteins.png"), 2000, 2000, res=300)
+      png(paste(comp.idx, "VolcanoProteins.png"), 2000, 2000, res=300)
       legendtitle = "Protein count"
       maintitle = "Volcano proteins %"
     } else if (PeporProt == "Peptide"){
-      png(paste(C,"VolcanoPeptides.png"), 2000, 2000, res=300)
+      png(paste(comp.idx, "VolcanoPeptides.png"), 2000, 2000, res=300)
       legendtitle = "Peptide count"
       maintitle = "Volcano peptides %"
     }
