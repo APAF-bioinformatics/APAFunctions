@@ -2,13 +2,13 @@
 #'
 #' @param exp Currently TMT or SWATH
 #' @param data Currently only used by TMT to get rownames
-#' @param components The output of PCA_calc()
+#' @param pca.components The output of PCA_calc()
 #' @param Group Group information for each column from PCA_calc() input (usually prot.ag). No replicate information.
 library(scatterplot3d) # KR - Can this be done in ggplot2?
 
-PCA_plot <- function(exp, pca.res, data, Group){
+PCA_plot <- function(exp, pca.components, data, Group){
   grp_colors = rainbow(nlevels(Group))
-  z <- pca.res$componentScores
+  z <- pca.components$componentScores
 
   if (exp == "SWATH"){
     png("PCA3D.png", 2000, 2000, res=300)
@@ -17,7 +17,7 @@ PCA_plot <- function(exp, pca.res, data, Group){
                xlab = "PC 3", ylab = "PC 2", zlab = "PC 1", distance = 0.1,
                main = "Projection in the space of the first 3 principal components"))
     dev.off()
-    cols <- rownames(components$summary$x)
+    cols <- rownames(pca.components$summary$x)
     png("PCA 2d - all.png", 2000, 2000, res=300)
     layout(matrix(1:4, nrow=2))
     plot(z[,1], z[,2], col=grp_colors[Group], pch=20, xlab="PC1", ylab="PC2")
@@ -31,8 +31,8 @@ PCA_plot <- function(exp, pca.res, data, Group){
   }
   else if (exp == "TMT")
   {
-    ld = pca.res$componentLoadings
-    props = round(100*pca.res$summary$importance[2,1:3], 1)# proportion of variance of the top 3 components
+    ld = pca.components$componentLoadings
+    props = round(100*pca.components$summary$importance[2,1:3], 1)# proportion of variance of the top 3 components
 
     png("PCA3dPlot.png", 2000, 2000, res=300)
     s3d <- scatterplot3d(z[,1:3], color=grp_colors[Group], col.axis=gray(0.85), col.grid="lightblue", box = T, angle = 26, pch=20)
