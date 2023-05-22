@@ -5,6 +5,7 @@
 #' @param design the processed design file object that contains labels
 #' @param Group groups that is represented as factors
 plotBoxPlots <- function(exp, data, design, Group){
+grp_colors = rainbow(nlevels(Group))
   if (exp=="TMT"){
     # raw and normalised to total ion count
     dat.ggplot <- data
