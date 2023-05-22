@@ -2,8 +2,8 @@
 #'
 #' @param result The results of the HClust() function
 #' @param glabel Group labels
-#' @param clabel column? cluster? labels TO DO: check this 
-#' @param ... Ellipses allow extra arguments to the function, taken in as a list  
+#' @param clabel column? cluster? labels TO DO: check this
+#' @param ... Ellipses allow extra arguments to the function, taken in as a list
 #'
 plotColouredDendrogram <- function (result, glabel, clabel = NULL, ...) {
   if (!is.null(clabel)) {

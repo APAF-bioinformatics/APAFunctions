@@ -1,16 +1,16 @@
 #' plotClusterProfile
 #'
-#' @param cluster.data 
-#' @param clustID 
-#' @param Group 
-#' @param k 
-#' @param ylab 
+#' @param cluster.data
+#' @param clustID
+#' @param Group
+#' @param k
+#' @param ylab
 #'
 #' @return
 #' @export
 #'
 plotClusterProfile <- function(cluster.data, clustID, Group, k=4, ylab="Abundance") {
-  # TO DO: refactor this 
+  # TO DO: refactor this
   numClusters <- k
   r.temp <- aggregate(t(cluster.data), by=list(gp=Group), FUN=mean)
   ag.sample <- r.temp[,-1]
@@ -20,7 +20,7 @@ plotClusterProfile <- function(cluster.data, clustID, Group, k=4, ylab="Abundanc
   ag.matrix <- as.matrix(ag.genes[,-1])
   ag.counts <- summary(as.factor(clustID))
   ag.bars <- as.matrix(ag.sd[,-1])
-  
+
   png("ClusterPatterns.png", 2000, 2000, res=300)
   par(bg=gray(.95), fg=gray(0.3), oma= c(5, 2, 2, 1) + 0.1, col.main="black", col.sub="black", col.lab="black", col.axis="black")
   layout(matrix(1:4, ncol=2, byrow=TRUE))

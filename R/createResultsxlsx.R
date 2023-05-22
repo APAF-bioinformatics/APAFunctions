@@ -2,6 +2,7 @@
 #'
 #' @param exp Either SWATH or TMT
 #' @param list A list of data frames containing data for excel output tabs
+#'
 createResultsxlsx <- function(exp = c("SWATH, TMT"), list = inputlist){ #Currently no defaults, you must supply all. Can change to arg=arg defaults later
   if (exp == "SWATH"){
     wb <- openxlsx::createWorkbook("Results.xlsx")
@@ -52,6 +53,5 @@ createResultsxlsx <- function(exp = c("SWATH, TMT"), list = inputlist){ #Current
     # if(inherits(ps, 'try-error') ) warning('Error with print sample group tab')
     #
     # saveWorkbook(wb, file="ResultsOverall.xlsx", overwrite=TRUE)
-
   }
 }

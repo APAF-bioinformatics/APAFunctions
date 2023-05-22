@@ -41,7 +41,5 @@ createResultsImagexlsx <- function(exp = c("SWATH", "TMT")){
     # # comparisons
     # printxlsInfoSheet(wb, tabName = 'Comparisons', dat.comparisons)
     # saveWorkbook(wb, file="ResultsTargeted2tail.xlsx", overwrite=TRUE)
-
   }
-
 }

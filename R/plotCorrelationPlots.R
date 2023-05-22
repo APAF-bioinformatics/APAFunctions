@@ -23,4 +23,5 @@ plotCorelationsPlots <- function(data, Group){
       pairs(log(dd+.5), lower.panel = panel.smooth, upper.panel = panel.cor, main=level)
       dev.off()
     }
+  }
 }
