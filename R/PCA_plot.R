@@ -12,7 +12,7 @@ PCA_plot <- function(exp, pca.res, data, Group){
 
   if (exp == "SWATH"){
     png("PCA3D.png", 2000, 2000, res=300)
-    plot(cloud(z[, 1] ~ z[, 3] + z[, 2], groups = as.factor(labelValue),
+    plot(cloud(z[, 1] ~ z[, 3] + z[, 2], groups = as.factor(Group),
                auto.key = list(points = TRUE, pch = 19, space = "right"),  #auto.key legend is ignoring pch styles, look into GGplot alternative
                xlab = "PC 3", ylab = "PC 2", zlab = "PC 1", distance = 0.1,
                main = "Projection in the space of the first 3 principal components"))
