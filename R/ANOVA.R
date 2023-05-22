@@ -1,3 +1,8 @@
+#' Runs an ANOVA and returns Anova.adj and Anova.idx
+#'
+#' @param data
+#' @param FCCutoff
+#' @param pvalcutoff
 ANOVA <- function(data, FCCutoff, pvalcutoff){
   Anova = rep(NA, nrow(data))
 
