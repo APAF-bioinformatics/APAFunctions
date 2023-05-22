@@ -4,8 +4,8 @@
 #' @return data_irs. This used for all later ion data in TMT at the moment. It shouldn't be called data_irs. It should be data_processed
 TMT_normalisation <- function(SampleLoadNorm){
   ### KR - to eventually be merged within and all-encompassing APAFunctions::normalize()
-  # Next week: to contain function arguments
-
+  # TO DO: Leave a skeleton structure for a place to add other normalisation functions (probably from external packages.)
+  # THIS is a place where the library should be in the APAFunctions/[something].R script itself, not in the main TMT/SWATH script
 
   #################################
   # Sample loading normalistation
