@@ -1,6 +1,5 @@
 #' Runs an ANOVA and returns Anova.adj and Anova.idx
 #'
-#' @param exp
 #' @param data
 #' @param Group
 #' @param FCCutoff
@@ -8,7 +7,6 @@
 ANOVA <- function(data, Group, FCCutoff, pvalcutoff) {
   Anova = rep(NA, nrow(data))
 
-  # compute Group means (in log space, geometric)
   data.ag = aggregate(t(data), by=list(Group=Group), FUN=function(v){exp(mean(log(na.omit(v))))})
   Means = t(data.ag[,-1])
   colnames(Means) = paste("Means",data.ag[,1])
