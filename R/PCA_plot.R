@@ -4,8 +4,7 @@
 #' @param data Currently only used by TMT to get rownames
 #' @param pca.components The output of PCA_calc()
 #' @param Group Group information for each column from PCA_calc() input (usually prot.ag). No replicate information.
-library(scatterplot3d) # KR - Can this be done in ggplot2?
-
+#'
 PCA_plot <- function(exp, pca.components, data, Group){
   grp_colors = rainbow(nlevels(Group))
   z <- pca.components$componentScores
