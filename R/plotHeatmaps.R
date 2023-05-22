@@ -7,8 +7,6 @@
 #' @param Group Group for the labels
 #' @param useAnova whether ANOVA has been preformed
 #'
-library(heatmap3)
-
 plotHeatmaps <- function(exp, data, Group, dist, Anova.idx=NULL, useAnova=FALSE){ # A clever solution would probably lose a few lines below.. Moving on.
   grp_colors = rainbow(nlevels(Group))
   if (exp == "TMT") {
