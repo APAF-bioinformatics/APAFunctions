@@ -1,9 +1,11 @@
 #' Runs an ANOVA and returns Anova.adj and Anova.idx
 #'
+#' @param exp
 #' @param data
+#' @param Group
 #' @param FCCutoff
 #' @param pvalcutoff
-ANOVA <- function(data, FCCutoff, pvalcutoff){
+ANOVA <- function(exp, data, Group, FCCutoff, pvalcutoff){
   Anova = rep(NA, nrow(data))
 
   # compute Group means (in log space, geometric)
@@ -15,7 +17,7 @@ ANOVA <- function(data, FCCutoff, pvalcutoff){
   for (i in 1:nrow(data)) {
     v = t(data[i,])
     nna.idx = !is.na(v)
-    an.res = try(anova(lm( log(v[nna.idx]+.5) ~ Group[nna.idx, drop=TRUE]))[1,"Pr(>F)"])
+    an.res = try(anova(lm(log(v[nna.idx]+.5) ~ Group[nna.idx, drop=TRUE]))[1,"Pr(>F)"])
     if (!inherits(an.res, "try-error")) Anova[i] = an.res;
   }
 
