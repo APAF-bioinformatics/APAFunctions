@@ -5,7 +5,7 @@
 #' @param Group
 #' @param FCCutoff
 #' @param pvalcutoff
-ANOVA <- function(exp, data, Group, FCCutoff, pvalcutoff){
+ANOVA <- function(exp, data, Group, FCCutoff, pvalcutoff) {
   Anova = rep(NA, nrow(data))
 
   # compute Group means (in log space, geometric)
