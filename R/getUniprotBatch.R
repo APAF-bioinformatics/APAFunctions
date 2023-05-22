@@ -37,7 +37,7 @@ getUniprotBatch = function(values=IDList, attributes=c("accession", "protein_nam
       query = paste("http://rest.uniprot.org/uniprotkb/search?query=",
                     paste(paste("accession_id:", ID_edit_l[[i]], sep=""), collapse="+OR+"),
                     "&fields=", paste(attributes, collapse=","), "&format=tsv&size=500", sep="")
-      res <- data.table::fread(text = getURI(query), header = T, encoding = "UTF-8")
+      res <- data.table::fread(text = RCurl::getURI(query), header = T, encoding = "UTF-8")
 
       # If UniProt has decided that an ID represent the same protein as another, or is two proteins, the API will just return '(de)merged' with no further details.
       # Start a new query and find new entry, remerge with res_final
