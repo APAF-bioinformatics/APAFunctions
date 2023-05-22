@@ -4,6 +4,7 @@
 #' @param attributes UniProt information to obtain. Default obtains accession, protein name and GO ID
 #'
 library(jsonlite)
+library(RCurl)
 
 getUniprotBatch = function(values=IDList, attributes=c("accession", "protein_name", "go_id")) {
   if (grepl("refGene", IDList[1]) == TRUE){
