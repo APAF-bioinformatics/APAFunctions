@@ -10,21 +10,25 @@
 library(heatmap3)
 
 plotHeatmaps <- function(exp, data, Group, dist, Anova.idx=NULL, useAnova=FALSE){ # A clever solution would probably lose a few lines below.. Moving on.
+  Group <- as.factor(Group)
   grp_colors = rainbow(nlevels(Group))
   if (exp == "TMT") {
     if (useAnova==FALSE) {
+      png("Correlation heatmap IRS.png", 2000, 2000,res=300)
       heatmap3(cor(log(na.omit(data+.5)), use="pairwise.complete.obs"), #distfun=cordist,
                col=colorRampPalette(c("green","black", "red"))(1024),
-               main="IRS correlation",
-               grp_colsideColors=rainbow(nlevels(Group))[Group], margins=c(10,10))
+               main="IRS correlation", ColSideColors=grp_colors[Group], margins=c(10,10))
       legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group), xpd=TRUE, cex=.6)
-      png("Correlation heatmap IRS.png", 2000, 2000,res=300)
+      dev.off()
     }
     else if (useAnova==TRUE) {
       if(nrow(data_irs[Anova.idx,]) > 3) {
         png("Heatmap - Anova DE.png", 2000, 2000, res=300)
-        hm1 <- heatmap3(as.matrix(na.omit(log(data[Anova.idx,]+.5))), margins=c(15,15), cexRow=1, col=colorRampPalette(c("green", "black", "red"))(120), grp_colorsideColors=grp_colors[Group])
+        heatmap3(as.matrix(na.omit(log(data[Anova.idx,]+.5))), margins=c(15,15),
+                 cexRow=1, col=colorRampPalette(c("green", "black", "red"))(120),
+                 ColSideColors=grp_colors[Group])
         legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group), xpd=TRUE,cex=.6 )
+        dev.off()
       }
     } else if (exp == "SWATH") {
       ## GERI: turned off row labels as they were just row numbers and gave no information
@@ -33,15 +37,15 @@ plotHeatmaps <- function(exp, data, Group, dist, Anova.idx=NULL, useAnova=FALSE)
       } else {
         x <- as.matrix(log(na.omit(data[,-1]+1)))
       }
-
       if (dist == "euclidean"){
         if (useAnova == TRUE){
           png("Heatmap euclidean - Anova DE.png", 2000, 2000, res=300)
         } else {
           png("Heatmap euclidean - all.png", 2000, 2000, res=300)
         }
-        hm <- heatmap(x, col=colorRampPalette(c("green", "red"))(120),  margins=c(10,15), cexRow=1, ColSideColors=rainbow(ncol(x)), labRow = NA)
-
+        heatmap(x, col=colorRampPalette(c("green", "red"))(120),  margins=c(10,15), cexRow=1, ColSideColors=grp_colors[Group], labRow = NA)
+        legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group), xpd=TRUE,cex=.6)
+        dev.off()
       } else if (dist == "cordist") {
         cordist <- function(d) {as.dist((1-cor(t(d)))/2)}
         if (useAnova == TRUE){
@@ -49,15 +53,14 @@ plotHeatmaps <- function(exp, data, Group, dist, Anova.idx=NULL, useAnova=FALSE)
         } else {
           png("Heatmap cordist - all.png", 2000, height=2000, res=300)
         }
-        hm <- heatmap(x, col=colorRampPalette(c("green", "red"))(120),  margins=c(10,15), cexRow=1, distfun=cordist, ColSideColors=rainbow(ncol(x)), labRow = NA)
+        heatmap(x, col=colorRampPalette(c("green", "red"))(120),  margins=c(10,15), cexRow=1, distfun=cordist,
+                ColSideColors=rainbow(ncol(x)), labRow = NA)
+        legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group))
+        dev.off()
       }
-
       else {
         stop("Heatmap currently only supports euclidean or cor distances")
       }
-
-      legend("topright", fill=rainbow(nlevels(as.factor(Group))), legend=levels(as.factor(Group)))
     }
   }
-  dev.off()
 }
