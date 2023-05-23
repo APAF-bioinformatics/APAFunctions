@@ -9,6 +9,9 @@ plotClusterProfile(cluster.data, clustID, Group, k = 4, ylab = "Abundance")
 \arguments{
 \item{ylab}{}
 }
+\value{
+
+}
 \description{
 plotClusterProfile
 }

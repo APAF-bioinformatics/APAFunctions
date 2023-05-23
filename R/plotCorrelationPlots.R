@@ -2,7 +2,8 @@
 #'
 #' @param data
 #' @param Group
-plotCorelationsPlots <- function(data, Group){
+#'
+plotCorrelationPlots <- function(data, Group){
 
   # This function is just used to run pairs()
   panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
