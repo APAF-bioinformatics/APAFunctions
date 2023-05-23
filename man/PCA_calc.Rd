@@ -5,17 +5,17 @@
 \title{Compute PCA, no plots}
 \usage{
 PCA_calc(
-  data,
   exp = c("SWATH", "TMT"),
+  data,
   scaleR = FALSE,
   scaleC = TRUE,
   k = min(dim(data)) - 2
 )
 }
 \arguments{
-\item{data}{The prot.ag dataframe. Long format intensity? data with protein name as first column.}
-
 \item{exp}{experiment: either SWATH or TMT}
+
+\item{data}{The prot.ag dataframe. Long format intensity? data with protein name as first column.}
 
 \item{scaleR}{TO BE DETERMINED - leave as FALSE as on GenePattern - manual row scaling?}
 

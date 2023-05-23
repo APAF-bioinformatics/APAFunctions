@@ -2,12 +2,12 @@
 % Please edit documentation in R/plotRelativeDensities.R
 \name{plotRelativeDensities}
 \alias{plotRelativeDensities}
-\title{Plot the relative of ions (provide matrix w/ or wo/ normalisation)}
+\title{Plot the relative of ions (provide ion matrix w/ or wo/ normalisation)}
 \usage{
-plotRelativeDensities(mat, Group = NULL, idx = NULL, main = "Densities")
+plotRelativeDensities(data, Group = NULL, idx = NULL, main = "Densities")
 }
 \arguments{
-\item{mat}{matrix of ion intensities}
+\item{data}{matrix of ion intensities}
 
 \item{Group}{Group from the design file}
 
@@ -16,5 +16,5 @@ plotRelativeDensities(mat, Group = NULL, idx = NULL, main = "Densities")
 \item{main}{The label? of the densities}
 }
 \description{
-Plot the relative of ions (provide matrix w/ or wo/ normalisation)
+Plot the relative of ions (provide ion matrix w/ or wo/ normalisation)
 }

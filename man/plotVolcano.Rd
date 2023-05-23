@@ -5,23 +5,26 @@
 \title{The Volcano plot function for all APAF scripts}
 \usage{
 plotVolcano(
-  ProtPepCounts = ag.pepN,
-  ProtStats = ProtStats,
+  exp,
+  FC,
+  pval,
+  counts,
   PeporProt,
-  FCcutoff = 1.5,
+  comp.idx,
+  FCCutoff = 1.5,
   pvalcutoff = 0.05
 )
 }
 \arguments{
-\item{ProtPepCounts}{ProteinName, NumberofPeptides}
+\item{exp}{SWATH or TMT}
 
-\item{ProtStats}{ProteinName, pval, FC}
+\item{counts}{number of times target has been detected}
 
 \item{PeporProt}{Specify 'Protein' or 'Peptide' depending on the plot. No other options are accepted}
 
-\item{FCcutoff}{Fold Change cut off. Should be passed in from the script environment, but defaults to 1.5}
+\item{FCCutoff}{Fold Change cut off. Should be passed in from the script environment, but defaults to 1.5}
 
-\item{pvalcutoff}{P-value cut off. Should be passed in from the script environment, but defaults to 0.05}
+\item{ProtStats}{ProteinName, pval, FC}
 }
 \description{
 The Volcano plot function for all APAF scripts

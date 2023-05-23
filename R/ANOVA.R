@@ -22,5 +22,5 @@ ANOVA <- function(data, Group, FCCutoff, pvalcutoff) {
   Anova.adj = p.adjust(Anova, method = "fdr")
   Anova.idx = !is.na(MaxFC) & (MaxFC > FCCutoff) & !is.na(Anova) & (Anova < pvalcutoff)
 
-  return(list(Anova.adj=Anova.adj, Anova.idx=Anova.idx))
+  return(list(Anova=Anova, Anova.adj=Anova.adj, Anova.idx=Anova.idx, Means=Means, MaxFC=MaxFC))
 }

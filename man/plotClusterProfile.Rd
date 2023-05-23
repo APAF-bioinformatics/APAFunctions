@@ -4,17 +4,9 @@
 \alias{plotClusterProfile}
 \title{plotClusterProfile}
 \usage{
-plotClusterProfile(cluster.data, clustID, group, k = 4, ylab = "Abundance")
+plotClusterProfile(cluster.data, clustID, Group, k = 4, ylab = "Abundance")
 }
 \arguments{
-\item{cluster.data}{}
-
-\item{clustID}{}
-
-\item{group}{}
-
-\item{k}{}
-
 \item{ylab}{}
 }
 \description{

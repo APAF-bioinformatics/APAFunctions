@@ -16,12 +16,6 @@ createClusterDendrogram(
 \arguments{
 \item{res1}{Dunno, this should be renamed here and in the main script}
 
-\item{cluster.data}{}
-
-\item{clusterMetric}{}
-
-\item{Anova.idx}{}
-
 \item{Group}{}
 }
 \description{

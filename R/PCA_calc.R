@@ -24,11 +24,10 @@ PCA_calc <- function (exp=c("SWATH", "TMT"), data, scaleR=FALSE, scaleC=TRUE, k=
     row.nrm <- pmax(row.nrm, 1e-04)
     data <- sweep(data, 1, row.nrm, FUN = "/")
   }
-  result <- try(prcomp(data, retx = TRUE, scale = scaleC),
-                silent = FALSE)
+  result <- try(prcomp(data, retx=TRUE, scale=scaleC), silent=FALSE)
   if (inherits(result, "try-error"))
     stop("Failed to Calculate Principal Components")
-  components <- list(componentVariances = (result$sdev^2)[1:k],
-                     componentScores = result$x[, 1:k], componentLoadings = result$rotation[, 1:k], summary = summary(result))
+  components <- list(componentVariances=(result$sdev^2)[1:k], componentScores=result$x[, 1:k],
+                     componentLoadings=result$rotation[, 1:k], summary=summary(result))
   return(components)
 }

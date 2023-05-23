@@ -4,12 +4,16 @@
 \alias{PCA_plot}
 \title{Generate 2D and 3D PCA plots}
 \usage{
-PCA_plot(components, labelValue)
+PCA_plot(exp, pca.components, data, Group)
 }
 \arguments{
-\item{components}{The output of PCA_calc()}
+\item{exp}{Currently TMT or SWATH}
 
-\item{labelValue}{Group information for each column from PCA_calc() input (usually prot.ag). No replicate information.}
+\item{pca.components}{The output of PCA_calc()}
+
+\item{data}{Currently only used by TMT to get rownames}
+
+\item{Group}{Group information for each column from PCA_calc() input (usually prot.ag). No replicate information.}
 }
 \description{
 Generate 2D and 3D PCA plots
