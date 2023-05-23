@@ -9,7 +9,6 @@
 #'
 createClusterDendrogram <- function(res1, cluster.data, clusterMetric, Cluster, Anova.idx, Group){
   png("CLUST1Genes.png", 1000, 1000)
-
   clustID <- res1$clustID
   Cluster[Anova.idx] = clustID
   res <- HClust((cluster.data), metric=clusterMetric, method="complete", clabel=clustID) # Oh no, I think HClust is making CLUST1Genes. Separate out clust_calc() and clust_plot()
