@@ -9,6 +9,30 @@
 #' @param ProtStats ProteinName, pval, FC
 #'
 plotVolcano <- function(exp, FC, pval, counts, PeporProt, comp.idx, FCCutoff=1.5, pvalcutoff=0.05){
+
+  if (exp == "TMT"){
+    volcdat <- data.frame(FC = FC, pval = pval)
+    #volcdat$annot <- rownames(volcdat)
+    volcdat$sig <- ifelse(volcdat$pval>pvalcutoff, "no",
+                          ifelse(is.na(volcdat$pval), "no",
+                                 ifelse(abs(volcdat$FC)>FCCutoff, "yes", "no")))
+    #subset <- subset(volcdat, volcdat$sig == "yes")
+    #subset <- order(subset$FC, decreasing = TRUE)
+    #volcdat$labs <- ifelse(volcdat$annot %in% ,
+    #                       volcdat$annot, "")
+
+    ggplot(volcdat, aes(x = FC, y = -log10(pval), col = sig, label = labs)) +
+      geom_point(show.legend = F) + # can show legend if wanting to
+      theme_bw() +
+      geom_hline(yintercept = -log10(pvalcutoff)) +
+      geom_vline(xintercept = c(abs(-FCCutoff), FCCutoff)) +
+      scale_color_manual(values = c("no" = "gray70", "yes" = "red")) #+
+      #geom_text(aes(label = ifelse(labs == "", "", labs)), col = "black")
+  } else {"Do something else"}
+
+
+
+
   if (PeporProt != "Protein" && PeporProt != "Peptide") stop("plotVolcano() only supports 'Protein' or 'Peptide'.")
 
     legendtext <- seq(from = 0, to = round(max(FC+5), digits = -1), by = 5)

@@ -11,8 +11,9 @@
 #'
 plotClusterProfile <- function(cluster.data, clustID, Group, k=4, ylab="Abundance") {
   # TO DO: refactor this
+  cluster.data <- log(scaled.cluster.data)
   numClusters <- k
-  r.temp <- aggregate(t(cluster.data), by=list(gp=Group), FUN=mean)
+  r.temp <- aggregate(t(cluster.data), by=list(Group=Group), FUN=mean)
   ag.sample <- r.temp[,-1]
   rownames(ag.sample) <- r.temp[,1]
   ag.genes <- aggregate(t(ag.sample), by=list(Cluster=clustID), FUN=mean)
