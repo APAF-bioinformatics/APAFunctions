@@ -25,8 +25,8 @@ plotHeatmaps <- function(exp, data, Group, dist, Anova.idx=NULL, useAnova=FALSE)
       png("Correlation heatmap IRS.png", 2000, 2000, res = 300)
     }
     par(oma=c(0,0,1,0))
-    heatmap3(x, margins=c(8,8), cexRow=1, col=colorRampPalette(c("green", "black", "red"))(120),
-             ColSideColors=grp_colors[Group], main = maintitle)
+    heatmap3(x, margins=c(8,5), cexRow=1, col=colorRampPalette(c("green", "black", "red"))(120),
+             ColSideColors=grp_colors[Group], main = maintitle, ColSideLabs = NA, labRow = F)
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group), xpd=TRUE,cex=.6)
     dev.off()
 
@@ -57,8 +57,8 @@ plotHeatmaps <- function(exp, data, Group, dist, Anova.idx=NULL, useAnova=FALSE)
     }
     else { stop("Heatmap currently only supports euclidean or cor distances")}
     par(oma=c(0,0,1,0))
-    heatmap(x, col=colorRampPalette(c("green", "red"))(120),  margins=c(8,8), cexRow=1, distfun=disfun,
-            ColSideColors=grp_colors[Group], labRow = NA, main = maintitle)
+    heatmap(x, col=colorRampPalette(c("green", "red"))(120),  margins=c(8,5), cexRow=1, distfun=disfun,
+            ColSideColors=grp_colors[Group], labRow = NA, main = maintitle, labRow = F)
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group))
     dev.off()
   }
