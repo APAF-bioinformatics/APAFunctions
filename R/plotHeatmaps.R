@@ -24,7 +24,7 @@ plotHeatmaps <- function(exp, data, Group, dist, Anova.idx=NULL, useAnova=FALSE)
       maintitle = "TMT - IRS Heatmap"
       png("Correlation heatmap IRS.png", 2000, 2000, res = 300)
     }
-    heatmap3(x, margins=c(15,15), cexRow=1, col=colorRampPalette(c("green", "black", "red"))(120),
+    heatmap3(x, margins=c(8,8), cexRow=1, col=colorRampPalette(c("green", "black", "red"))(120),
              ColSideColors=grp_colors[Group], main = maintitle)
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group), xpd=TRUE,cex=.6)
     dev.off()
