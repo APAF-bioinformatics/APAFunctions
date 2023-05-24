@@ -77,8 +77,7 @@ normalize <- function(exp, data_raw, normalization, Group){
     data <- mlrrep(norm.data)
   }
 
-  if (exp == "SWATH") # KR - not sure if this is still necessary
-  {
+  if (exp == "SWATH") { # KR - not sure if this is still necessary
     data <- format(round(colSums(na.omit(data)), digits = 0), big.mark = ",")
   }
   data_norm <- data

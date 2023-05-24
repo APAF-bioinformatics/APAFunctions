@@ -1,9 +1,9 @@
 #' Creates an Excel workbook all results. Later it should format based upon experiment. TO DO: parameter values like normalization etc should be passed in
 #'
 #' @param exp Either SWATH or TMT
-#' @param list A list of data frames containing data for excel output tabs
+#' @param list A list of data frames containing data for Excel output tabs
 #'
-createResultsxlsx <- function(exp = c("SWATH, TMT"), list = inputlist){ #Currently no defaults, you must supply all. Can change to arg=arg defaults later
+createResultsxlsx <- function(exp = c("SWATH, TMT"), inputlist){ #Currently no defaults, you must supply all.
   wb <- createWorkbook("Results.xlsx")
 
   if (exp == "SWATH"){
