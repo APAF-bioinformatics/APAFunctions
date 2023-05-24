@@ -22,10 +22,10 @@
     <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/PCA_plot.html</loc>
   </url>
   <url>
-    <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/TMT_normalisation.html</loc>
+    <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/applyttest.html</loc>
   </url>
   <url>
-    <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/applyttest.html</loc>
+    <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/clean.html</loc>
   </url>
   <url>
     <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/createClusterDendrogram.html</loc>
@@ -44,6 +44,9 @@
   </url>
   <url>
     <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/make_CVs.html</loc>
+  </url>
+  <url>
+    <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/normalize.html</loc>
   </url>
   <url>
     <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/plotBoxPlots.html</loc>
