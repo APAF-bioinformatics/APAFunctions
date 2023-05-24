@@ -33,13 +33,14 @@ createResultsxlsx <- function(exp = c("SWATH, TMT"), inputlist){ #Currently no d
     if(inherits(ps, 'try-error') ) warning('Error with print overall PCA component scores tab')
     writeData(wb, sheet = "PCAScores", "Sample", startCol = 1, startRow = 1) # Otherwise gives ugly col heading of rownames.pca.components.componentScores.
     ps <- try(printxlsInfoSheet(wb, tabName = "PCALoadings", file = data.frame(rownames(pca.components$componentLoadings), pca.components$componentLoadings)))
-    writeData(wb, sheet = "Loadings", "Accession", startCol = 1, startRow = 1) # Otherwise gives ugly col heading of rownames.pca.components.componentLoadings.
+    writeData(wb, sheet = "PCALoadings", "Accession", startCol = 1, startRow = 1) # Otherwise gives ugly col heading of rownames.pca.components.componentLoadings.
     if(inherits(ps, 'try-error') ) warning('Error with print overall PCA loading tab')
     ps <- try(printxlsInfoSheet(wb, tabName = "SampleGroup", file = dat.samplegroup))
     if(inherits(ps, 'try-error') ) warning('Error with print sample group tab')
     printxlsInfoSheet(wb, "Design", inputlist[["design"]])
     printxlsInfoSheet(wb, "Comparisons", inputlist[["comps"]])
     printxlsInfoSheet(wb, "InputParameters", inputlist[["params"]])
+    saveWorkbook(wb, file="ResultsOverall.xlsx", overwrite=TRUE)
     for (s in 2:length(getSheetNames("ResultsOverall.xlsx"))) { setColWidths(wb, sheet = s, cols = 1:2, widths = "auto") }
     saveWorkbook(wb, file="ResultsOverall.xlsx", overwrite=TRUE)
 
