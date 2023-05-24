@@ -5,10 +5,10 @@
 \title{Set openxlsx style for comparisons and ANOVA table}
 \usage{
 printxlsxDataSheet(
+  wb,
   data,
   FCcol,
   pvalcol,
-  wb,
   tabName = "results",
   hiCutoff = 1.5,
   lowCutoff = 0.67,
@@ -16,13 +16,13 @@ printxlsxDataSheet(
 )
 }
 \arguments{
+\item{wb}{Keep the same workbook to maintain the styles}
+
 \item{data}{If more than sheet to be added, needs to be in for loop}
 
 \item{FCcol}{Column index for Fold Change values}
 
 \item{pvalcol}{Column index for pvalues}
-
-\item{wb}{Keep the same workbook to maintain the styles}
 
 \item{tabName}{Tab name, specify each time to avoid overwriting previous tabs}
 

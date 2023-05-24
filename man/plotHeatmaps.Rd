@@ -9,7 +9,7 @@ plotHeatmaps(exp, data, Group, dist, Anova.idx = NULL, useAnova = FALSE)
 \arguments{
 \item{exp}{SWATH or TMT at the moment, but this should be joined together}
 
-\item{data}{either data_irs (list of ion data from TMT) or prot.ag (table with Protein name and intensities by group)}
+\item{data}{either data (list of normalised ion data from TMT) or prot.ag (table with Protein name and intensities by group)}
 
 \item{Group}{Group for the labels}
 

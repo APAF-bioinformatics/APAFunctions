@@ -68,4 +68,3 @@ createResultsxlsx <- function(exp = c("SWATH, TMT"), list = inputlist){ #Current
 
   saveWorkbook(designSheets, file='Design.xlsx', overwrite=TRUE)
 }
-}
