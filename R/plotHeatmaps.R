@@ -2,7 +2,7 @@
 #'
 #' @param exp SWATH or TMT at the moment, but this should be joined together
 #' @param Anova.idx index of where significant ANOVA values are
-#' @param data either data_irs (list of ion data from TMT) or prot.ag (table with Protein name and intensities by group)
+#' @param data either data (list of normalised ion data from TMT) or prot.ag (table with Protein name and intensities by group)
 #' @param dist either [euclidean or cordist]
 #' @param Group Group for the labels
 #' @param useAnova whether ANOVA has been preformed

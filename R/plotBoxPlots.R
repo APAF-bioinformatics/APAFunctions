@@ -9,7 +9,7 @@ grp_colors = rainbow(nlevels(Group))
   if (exp=="TMT"){
     # raw and normalised to total ion count
     dat.ggplot <- data
-    dat.ggplot$id <- rownames(data_irs)
+    dat.ggplot$id <- rownames(data)
     dat.ggplot <- melt(dat.ggplot, id.vars = "id")
     dat.ggplot$Label <- gsub(".*\\.", "", dat.ggplot$variable)
     dat.ggplot <- merge(dat.ggplot, designLong, by = "Label")
@@ -27,7 +27,7 @@ grp_colors = rainbow(nlevels(Group))
     png("BoxplotDensity.png", width=3500, height=1700,res=300)
     layout(matrix(1:2, nrow=1))
     par(mar=c(13,4,4,2)+.1)
-    limma::plotDensities(log(na.omit(data_irs+.5)), col=grp_colors[Group], legend=FALSE, main=paste(SampleLoadNorm, "and IRS normalised"))
+    limma::plotDensities(log(na.omit(data+.5)), col=grp_colors[Group], legend=FALSE, main=paste(SampleLoadNorm, "and IRS normalised"))
     legend('topright', fill=grp_colors[1:nlevels(Group)], legend=levels(Group))
     boxplot(log(data[, order(Group)]+.5), las=2, col=grp_colors[Group[order(Group)]],
             main=paste(SampleLoadNorm, "and IRS normalised"),

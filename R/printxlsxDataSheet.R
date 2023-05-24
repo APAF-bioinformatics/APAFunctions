@@ -1,15 +1,15 @@
 #' Set openxlsx style for comparisons and ANOVA table
 #'
+#' @param wb Keep the same workbook to maintain the styles
 #' @param data If more than sheet to be added, needs to be in for loop
 #' @param FCcol Column index for Fold Change values
 #' @param pvalcol Column index for pvalues
-#' @param wb Keep the same workbook to maintain the styles
 #' @param tabName Tab name, specify each time to avoid overwriting previous tabs
 #' @param hiCutoff Default 1.5
 #' @param lowCutoff Default 0.67
 #' @param pvalCutoff Default 0.05
 #'
-printxlsxDataSheet <- function(data, FCcol, pvalcol, wb, tabName = "results", hiCutoff = 1.5, lowCutoff=0.67, pvalCutoff=0.05) {
+printxlsxDataSheet <- function(wb, data, FCcol, pvalcol, tabName = "results", hiCutoff = 1.5, lowCutoff=0.67, pvalCutoff=0.05) {
 #TO DO: colour the ID column in grey and header row in blue like in SimpleSheet()
   addWorksheet(wb, sheet=tabName)
   header <- createStyle(fgFill = "lightblue")

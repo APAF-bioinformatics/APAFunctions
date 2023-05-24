@@ -18,10 +18,10 @@ plotCorrelationPlots <- function(data, Group){
   }
 
   for (level in levels(Group)) {
-    d_no_NA <- na.omit(data[, level, drop=FALSE]) # KR - Took a stab here, not sure if this is what it's meant to do
+    d_no_NA <- na.omit(data[, Group == level, drop=FALSE]) # KR - Took a stab here, not sure if this is what it's meant to do
     if(ncol(d_no_NA) > 1) {
       png(paste("Cor", level, ".png", sep=""), 2000, 2000,res=300)
-      pairs(log(dd+.5), lower.panel = panel.smooth, upper.panel = panel.cor, main=level)
+      pairs(log(d_no_NA+.5), lower.panel = panel.smooth, upper.panel = panel.cor, main=level)
       dev.off()
     }
   }

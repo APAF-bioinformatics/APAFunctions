@@ -9,6 +9,7 @@
 #' @return
 #' @export
 #'
+#' TO DO: drop the overlaid data labels
 plotClusterProfile <- function(cluster.data, clustID, Group, k=4, ylab="Abundance") {
   # TO DO: refactor this
   cluster.data <- log(scaled.cluster.data)
