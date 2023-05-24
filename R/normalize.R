@@ -7,7 +7,7 @@
 #'
 #' @return data_norm the normalised data. The type of normalisation depends on the experiment and the normalization environment variable set through --normalization
 #'
-normalize <- function(exp, data, normalization, Group){
+normalize <- function(exp, data_raw, normalization, Group){
   ## KR - I don't think it make senses to me to do multiple normalisations using, e.g., --normalize="Total+IRS", but leaving for now.
 
   if((grepl("Total", normalization) == TRUE)) {
@@ -24,13 +24,18 @@ normalize <- function(exp, data, normalization, Group){
 
   if((grepl("IRS", normalization) == TRUE)) {
     list.exp = list()
-    for(i in 1:length(list.dat)) list.exp[[i]]=data[,grep(paste0("R",i), colnames(data))]
+    for(i in 1:length(list.dat)) {
+      list.exp[[i]]=data[,grep(paste0("R",i), colnames(data))]
+    }
 
     # Calculate the protein sum for each batch
     list.rowsum = lapply(list.exp, function(x) apply(x,1, function(y) (sum(na.omit(y)))))
     irs = as.data.frame(list.rowsum[[1]])
     if(length(list.rowsum) > 1){
-      for(i in 2:length(list.rowsum)) irs = cbind(irs, as.data.frame(list.rowsum[[i]]))}
+      for(i in 2:length(list.rowsum)) {
+        irs = cbind(irs, as.data.frame(list.rowsum[[i]]))
+      }
+    }
 
     # convert 0 to NA
     # GS - TODO: future problem. Applying stats to missing data
@@ -45,7 +50,10 @@ normalize <- function(exp, data, normalization, Group){
     # make new data frame with normalized data
     data <- list.irs.scaled[[1]]
     if(length(list.irs.scaled) > 1){
-      for(i in 2:length(list.irs.scaled)) data = cbind(data, list.irs.scaled[[i]])}
+      for(i in 2:length(list.irs.scaled)) {
+        data = cbind(data, list.irs.scaled[[i]])
+      }
+    }
 
     # in case of 0 - GS: redundant if no 0s in dataset?
     data = data+1
@@ -69,8 +77,10 @@ normalize <- function(exp, data, normalization, Group){
     data <- mlrrep(norm.data)
   }
 
-
-  data <- format(round(colSums(na.omit(data)), digits = 0), big.mark = ",")
+  if (exp == "SWATH") # KR - not sure if this is still necessary
+  {
+    data <- format(round(colSums(na.omit(data)), digits = 0), big.mark = ",")
+  }
   data_norm <- data
   return(data_norm)
 }
