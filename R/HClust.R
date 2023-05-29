@@ -1,5 +1,6 @@
 #' Clustering method. If plot == TRUE, it plots using APAFunctions::plotColouredDendrogram()
 #'
+#' @param exp
 #' @param data
 #' @param metric
 #' @param scale
@@ -11,7 +12,7 @@
 #' @param cutHeight
 #' @param plot uses APAFunctions::plotColouredDendrogram(), defaults to TRUE
 #'
-HClust <- function (data, metric = c("euclidean", "manhattan", "pearsonCorrelation"),
+HClust <- function (exp=c("SWATH", "TMT"), data, metric = c("euclidean", "manhattan", "pearsonCorrelation"),
                     scale = FALSE, method = c("single", "complete", "average"),
                     basefile = "hclust", glabel = row.names(data), clabel = NULL,
                     cutNumber = NULL, cutHeight = NULL, plot = TRUE)
@@ -42,7 +43,7 @@ HClust <- function (data, metric = c("euclidean", "manhattan", "pearsonCorrelati
   if (inherits(hclust_res, "try-error")) { Error("Failed to Calculate Cluster Tree") }
   hplot <- paste(basefile, metric, method, sep = "-") # Is this object used elsewhere?
   if (plot) {
-    plotColouredDendrogram(hclust_res, glabel = glabel, clabel = clabel, sub = paste("method = ", method), xlab = "Assays")
+    plotClusterDendrogram(exp, hclust_res, glabel = glabel, clabel = clabel, sub = paste("method = ", method), xlab = "Assays")
   }
   clustID <- NULL
   clustres_list <- list(merge = hclust_res$merge, height = hclust_res$height,
