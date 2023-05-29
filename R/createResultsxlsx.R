@@ -13,7 +13,7 @@ createResultsxlsx <- function(exp = c("SWATH, TMT"), inputlist){ #Currently no d
       printxlsxDataSheet(wb, data=res.list[[i]], FCcol=grep("FC", names(res.list[[i]])), pvalcol=grep("pval", tolower(names(res.list[[i]]))), tabName=comps[i,1])
     }
     Anova.table <- inputlist[["Anova.table"]]
-    printDataSheet(wb, Anova.table, FCcol = grep("MaxFC", names(Anova.table)), pvalcol = grep("Anova", names(Anova.table))[1:2], tabName="AllProteinsNorm")
+    printxlsxDataSheet(wb, Anova.table, FCcol = grep("MaxFC", names(Anova.table)), pvalcol = grep("Anova", names(Anova.table))[1:2], tabName="AllProteinsNorm")
     printxlsxInfoSheet(wb, "Design", inputlist[["design"]])
     printxlsxInfoSheet(wb, "Comparisons", inputlist[["comps"]])
     printxlsxInfoSheet(wb, "InputParameters", inputlist[["params"]])
