@@ -4,10 +4,16 @@
 \alias{applyttest}
 \title{An APAF wrapper for t.test() that works for both proteins and peptides}
 \usage{
-applyttest(mat, Group, PeporProt, doLogs = TRUE, numerator = levels(Group)[1])
+applyttest(
+  data,
+  Group,
+  PeporProt = c("Peptide", "Protein"),
+  doLogs = TRUE,
+  numerator = levels(Group)[1]
+)
 }
 \arguments{
-\item{mat}{input matrix, is as subset of either prot.ag or pep.ag}
+\item{data}{input matrix, is as subset of either prot.ag or pep.ag}
 
 \item{Group}{Group for the labels}
 

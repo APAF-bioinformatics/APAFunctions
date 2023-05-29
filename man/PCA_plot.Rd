@@ -4,14 +4,14 @@
 \alias{PCA_plot}
 \title{Generate 2D and 3D PCA plots}
 \usage{
-PCA_plot(exp, pca.components, data, Group)
+PCA_plot(exp = c("SWATH", "TMT"), data, pca.components, Group)
 }
 \arguments{
 \item{exp}{Currently TMT or SWATH}
 
-\item{pca.components}{The output of PCA_calc()}
-
 \item{data}{Currently only used by TMT to get rownames}
+
+\item{pca.components}{The output of PCA_calc()}
 
 \item{Group}{Group information for each column from PCA_calc() input (usually prot.ag). No replicate information.}
 }

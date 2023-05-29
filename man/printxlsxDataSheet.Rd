@@ -10,9 +10,9 @@ printxlsxDataSheet(
   FCcol,
   pvalcol,
   tabName = "results",
-  hiCutoff = 1.5,
-  lowCutoff = 0.67,
-  pvalCutoff = 0.05
+  hicutoff = 1.5,
+  lowcutoff = 0.67,
+  pvalcutoff = 0.05
 )
 }
 \arguments{
@@ -26,11 +26,11 @@ printxlsxDataSheet(
 
 \item{tabName}{Tab name, specify each time to avoid overwriting previous tabs}
 
-\item{hiCutoff}{Default 1.5}
+\item{hicutoff}{Default 1.5}
 
-\item{lowCutoff}{Default 0.67}
+\item{lowcutoff}{Default 0.67}
 
-\item{pvalCutoff}{Default 0.05}
+\item{pvalcutoff}{Default 0.05}
 }
 \description{
 Set openxlsx style for comparisons and ANOVA table

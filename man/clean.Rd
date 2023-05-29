@@ -5,10 +5,10 @@
 \title{TO DO: make a clean function that can clean data based on its type. Blank for now
 --clean argument should have a flag for the search engine used, e.g. MaxQuant or Protein Discoverer. Version numbers matter as well.}
 \usage{
-clean(exp, filelist, data)
+clean(exp = c("SWATH", "TMT"), data, filelist)
 }
 \arguments{
-\item{data}{}
+\item{filelist}{}
 }
 \description{
 TO DO: make a clean function that can clean data based on its type. Blank for now

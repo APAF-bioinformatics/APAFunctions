@@ -4,7 +4,7 @@
 \alias{ANOVA}
 \title{Runs an ANOVA and returns Anova.adj and Anova.idx}
 \usage{
-ANOVA(data, Group, FCCutoff, pvalcutoff)
+ANOVA(data, Group, FCcutoff, pvalcutoff)
 }
 \description{
 Runs an ANOVA and returns Anova.adj and Anova.idx

@@ -4,16 +4,23 @@
 \alias{plotHeatmaps}
 \title{Plots a heatmap with either euclidean or cor distance; ANOVA or no ANOVA}
 \usage{
-plotHeatmaps(exp, data, Group, dist, Anova.idx = NULL, useAnova = FALSE)
+plotHeatmaps(
+  exp = c("SWATH", "TMT"),
+  data,
+  Group,
+  dist,
+  Anova.idx = NULL,
+  useAnova = FALSE
+)
 }
 \arguments{
-\item{exp}{SWATH or TMT at the moment, but this should be joined together}
+\item{exp}{SWATH or TMT at the moment}
 
-\item{data}{either data (list of normalised ion data from TMT) or prot.ag (table with Protein name and intensities by group)}
+\item{data}{ion data: either in the format of a list of normalised ion data matrix from TMT, or prot.ag (table with Protein name and intensities by group) in SWATH}
 
 \item{Group}{Group for the labels}
 
-\item{dist}{either [euclidean or cordist]}
+\item{dist}{distance function either [euclidean or cordist]}
 
 \item{Anova.idx}{index of where significant ANOVA values are}
 

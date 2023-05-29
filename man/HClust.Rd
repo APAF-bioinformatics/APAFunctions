@@ -2,10 +2,11 @@
 % Please edit documentation in R/HClust.R
 \name{HClust}
 \alias{HClust}
-\title{Clustering method. TO DO -- document later}
+\title{Clustering method. If plot == TRUE, it plots using APAFunctions::plotColouredDendrogram()}
 \usage{
 HClust(
-  data = data,
+  exp = c("SWATH", "TMT"),
+  data,
   metric = c("euclidean", "manhattan", "pearsonCorrelation"),
   scale = FALSE,
   method = c("single", "complete", "average"),
@@ -18,8 +19,10 @@ HClust(
 )
 }
 \arguments{
-\item{plot}{#plotting should be pulled out. plotting is provided by plotColouredDendrogram()}
+\item{basefile}{the base name for the type of hclust method used: e.g. hclust-pearsonCorrelation-complete}
+
+\item{plot}{uses APAFunctions::plotColouredDendrogram(), defaults to TRUE}
 }
 \description{
-Clustering method. TO DO -- document later
+Clustering method. If plot == TRUE, it plots using APAFunctions::plotColouredDendrogram()
 }

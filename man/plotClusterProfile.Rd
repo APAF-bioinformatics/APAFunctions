@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotClusterProfile.R
 \name{plotClusterProfile}
 \alias{plotClusterProfile}
-\title{plotClusterProfile}
+\title{TO DO: drop the overlaid data labels}
 \usage{
 plotClusterProfile(cluster.data, clustID, Group, k = 4, ylab = "Abundance")
 }
@@ -10,5 +10,5 @@ plotClusterProfile(cluster.data, clustID, Group, k = 4, ylab = "Abundance")
 \item{ylab}{}
 }
 \description{
-plotClusterProfile
+TO DO: drop the overlaid data labels
 }

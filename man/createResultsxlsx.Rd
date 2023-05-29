@@ -4,12 +4,12 @@
 \alias{createResultsxlsx}
 \title{Creates an Excel workbook all results. Later it should format based upon experiment. TO DO: parameter values like normalization etc should be passed in}
 \usage{
-createResultsxlsx(exp = c("SWATH, TMT"), list = inputlist)
+createResultsxlsx(exp = c("SWATH, TMT"), inputlist)
 }
 \arguments{
 \item{exp}{Either SWATH or TMT}
 
-\item{list}{A list of data frames containing data for excel output tabs}
+\item{inputlist}{A list of environment variables that containing info for Excel output tabs}
 }
 \description{
 Creates an Excel workbook all results. Later it should format based upon experiment. TO DO: parameter values like normalization etc should be passed in

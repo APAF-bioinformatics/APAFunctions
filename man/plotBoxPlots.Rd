@@ -4,12 +4,14 @@
 \alias{plotBoxPlots}
 \title{Plotting any APAF boxplots. To be done using ggplot, and take in any experiment type}
 \usage{
-plotBoxPlots(exp, data, design, Group)
+plotBoxPlots(exp = c("SWATH", "TMT"), data, normalization, design, Group)
 }
 \arguments{
 \item{exp}{the experiment type}
 
 \item{data}{for TMT this is the ion data matrix}
+
+\item{normalization}{The types of normalisation from APAFunctions::normalize() should  be listed here, but those are yet to be finalised}
 
 \item{design}{the processed design file object that contains labels}
 

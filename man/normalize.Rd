@@ -4,14 +4,14 @@
 \alias{normalize}
 \title{Any normalisation of the data matrix applied to APAF data}
 \usage{
-normalize(exp, data, normalization, Group)
+normalize(exp = c("SWATH", "TMT"), data_raw, normalization, Group)
 }
 \arguments{
+\item{data_raw}{The un-normalised raw ion data matrix, as a list}
+
 \item{normalization}{comes from the --normalization flag and decfults to "total"}
 
 \item{Group}{}
-
-\item{data_raw}{The un-normalised raw ion data matrix, as a list}
 }
 \value{
 data_norm the normalised data. The type of normalisation depends on the experiment and the normalization environment variable set through --normalization
