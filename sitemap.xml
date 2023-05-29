@@ -28,9 +28,6 @@
     <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/clean.html</loc>
   </url>
   <url>
-    <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/createClusterDendrogram.html</loc>
-  </url>
-  <url>
     <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/createResultsImagexlsx.html</loc>
   </url>
   <url>
@@ -52,10 +49,10 @@
     <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/plotBoxPlots.html</loc>
   </url>
   <url>
-    <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/plotClusterProfile.html</loc>
+    <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/plotClusterDendrogram.html</loc>
   </url>
   <url>
-    <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/plotColouredDendrogram.html</loc>
+    <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/plotClusterProfile.html</loc>
   </url>
   <url>
     <loc>https://apaf-bioinformatics.github.io/APAFunctions/reference/plotCorrelationPlots.html</loc>

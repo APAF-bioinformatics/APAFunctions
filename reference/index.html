@@ -54,7 +54,7 @@
           
           <code><a href="HClust.html">HClust()</a></code> 
         </dt>
-        <dd>Clustering method. TO DO -- document later</dd>
+        <dd>Clustering method. If plot == TRUE, it plots using APAFunctions::plotColouredDendrogram()</dd>
       </dl><dl><dt>
           
           <code><a href="PCA_calc.html">PCA_calc()</a></code> 
@@ -76,11 +76,6 @@
         </dt>
         <dd>TO DO: make a clean function that can clean data based on its type. Blank for now
 --clean argument should have a flag for the search engine used, e.g. MaxQuant or Protein Discoverer. Version numbers matter as well.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="createClusterDendrogram.html">createClusterDendrogram()</a></code> 
-        </dt>
-        <dd>Makes CLUST1Gene dendrogram, but also ClusterExpressionProfiles? TO DO: sort out who does what between this and HClust()</dd>
       </dl><dl><dt>
           
           <code><a href="createResultsImagexlsx.html">createResultsImagexlsx()</a></code> 
@@ -113,14 +108,14 @@
         <dd>Plotting any APAF boxplots. To be done using ggplot, and take in any experiment type</dd>
       </dl><dl><dt>
           
-          <code><a href="plotClusterProfile.html">plotClusterProfile()</a></code> 
+          <code><a href="plotClusterDendrogram.html">plotClusterDendrogram()</a></code> 
         </dt>
-        <dd>plotClusterProfile</dd>
+        <dd>The one function to plot dendrograms. Future: maybe rewrite with ggdendro?</dd>
       </dl><dl><dt>
           
-          <code><a href="plotColouredDendrogram.html">plotColouredDendrogram()</a></code> 
+          <code><a href="plotClusterProfile.html">plotClusterProfile()</a></code> 
         </dt>
-        <dd>plot a dendrogram, normally called after HClust()</dd>
+        <dd>TO DO: drop the overlaid data labels</dd>
       </dl><dl><dt>
           
           <code><a href="plotCorrelationPlots.html">plotCorrelationPlots()</a></code> 
