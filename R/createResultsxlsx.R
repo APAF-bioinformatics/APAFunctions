@@ -7,16 +7,16 @@ createResultsxlsx <- function(exp = c("SWATH, TMT"), inputlist){ #Currently no d
 
   if (exp == "SWATH") {
     wb <- createWorkbook("Results.xlsx")
-    printxlsInfoSheet(wb, tabName = "Key")
+    printxlsxInfoSheet(wb, tabName = "Key")
     for (i in 1:length(inputlist[["res.list"]])) {
       res.list <- inputlist[["res.list"]]
-      printDataSheet(wb, data=res.list[[i]], FCcol=grep("FC", names(res.list[[i]])), pvalcol=grep("pval", tolower(names(res.list[[i]]))), tabName=comps[i,1])
+      printxlsxDataSheet(wb, data=res.list[[i]], FCcol=grep("FC", names(res.list[[i]])), pvalcol=grep("pval", tolower(names(res.list[[i]]))), tabName=comps[i,1])
     }
     Anova.table <- inputlist[["Anova.table"]]
     printDataSheet(wb, Anova.table, FCcol = grep("MaxFC", names(Anova.table)), pvalcol = grep("Anova", names(Anova.table))[1:2], tabName="AllProteinsNorm")
-    printxlsInfoSheet(wb, "Design", inputlist[["design"]])
-    printxlsInfoSheet(wb, "Comparisons", inputlist[["comps"]])
-    printxlsInfoSheet(wb, "InputParameters", inputlist[["params"]])
+    printxlsxInfoSheet(wb, "Design", inputlist[["design"]])
+    printxlsxInfoSheet(wb, "Comparisons", inputlist[["comps"]])
+    printxlsxInfoSheet(wb, "InputParameters", inputlist[["params"]])
     saveWorkbook(wb, file="Results.xlsx",  overwrite=T)
     for (s in 1:length(getSheetNames("Results.xlsx"))) { setColWidths(wb, sheet = s, cols = 1:25, widths = "auto") }
     saveWorkbook(wb, file="Results.xlsx",  overwrite=T)
@@ -29,17 +29,17 @@ createResultsxlsx <- function(exp = c("SWATH, TMT"), inputlist){ #Currently no d
     wb <- createWorkbook("ReultsOverall.xlsx")
     ps <- try(printxlsxDataSheet(wb, data = full.res, FCcol=grep("MaxFC", names(full.res)), pvalcol=c(grep("Anova", names(full.res))), tabName = "AllData", hicutoff=FCcutoff, lowcutoff=1/FCcutoff, pvalcutoff))
     if(inherits(ps, 'try-error') ) warning('Error with print overall xlsx file')
-    ps <- try(printxlsInfoSheet(wb, tabName = "PCAScores", file = data.frame(rownames(pca.components$componentScores), pca.components$componentScores)))
+    ps <- try(printxlsxInfoSheet(wb, tabName = "PCAScores", file = data.frame(rownames(pca.components$componentScores), pca.components$componentScores)))
     if(inherits(ps, 'try-error') ) warning('Error with print overall PCA component scores tab')
     writeData(wb, sheet = "PCAScores", "Sample", startCol = 1, startRow = 1) # Otherwise gives ugly col heading of rownames.pca.components.componentScores.
-    ps <- try(printxlsInfoSheet(wb, tabName = "PCALoadings", file = data.frame(rownames(pca.components$componentLoadings), pca.components$componentLoadings)))
+    ps <- try(printxlsxInfoSheet(wb, tabName = "PCALoadings", file = data.frame(rownames(pca.components$componentLoadings), pca.components$componentLoadings)))
     writeData(wb, sheet = "PCALoadings", "Accession", startCol = 1, startRow = 1) # Otherwise gives ugly col heading of rownames.pca.components.componentLoadings.
     if(inherits(ps, 'try-error') ) warning('Error with print overall PCA loading tab')
-    ps <- try(printxlsInfoSheet(wb, tabName = "SampleGroup", file = dat.samplegroup))
+    ps <- try(printxlsxInfoSheet(wb, tabName = "SampleGroup", file = dat.samplegroup))
     if(inherits(ps, 'try-error') ) warning('Error with print sample group tab')
-    printxlsInfoSheet(wb, "Design", inputlist[["design"]])
-    printxlsInfoSheet(wb, "Comparisons", inputlist[["comps"]])
-    printxlsInfoSheet(wb, "InputParameters", inputlist[["params"]])
+    printxlsxInfoSheet(wb, "Design", inputlist[["design"]])
+    printxlsxInfoSheet(wb, "Comparisons", inputlist[["comps"]])
+    printxlsxInfoSheet(wb, "InputParameters", inputlist[["params"]])
     saveWorkbook(wb, file="ResultsOverall.xlsx", overwrite=TRUE)
     for (s in 2:length(getSheetNames("ResultsOverall.xlsx"))) { setColWidths(wb, sheet = s, cols = 1:2, widths = "auto") }
     saveWorkbook(wb, file="ResultsOverall.xlsx", overwrite=TRUE)
