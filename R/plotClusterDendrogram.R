@@ -14,6 +14,7 @@
 plotClusterDendrogram <- function (exp=c("SWATH", "TMT"), hclust_result, cluster.data, Group, clusterMetric, Cluster, Anova.idx,
                                    glabel, clabel = NULL, ...) {
   # TO DO: The SwATH implementation can probably be written in ggplot::ggdendro. In TMT, the section formatting the plot if clabel exists is too long.
+  # TO DO: atomic vector $ broken if plot=TRUE in HClust() which calls this function. Not broken if plot=FALSE
 
   if ( exp == "SWATH") {
     png("CLUST1Genes.png", 1000, 1000)

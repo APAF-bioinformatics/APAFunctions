@@ -9,7 +9,7 @@
 #' @param FCcutoff  Fold Change cut off. Should be passed in from the script environment, but defaults to 1.5
 #' @param numlabelled Number of points to label on graph, chooses most extreme
 #'
-plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", "Protein"), comp.idx, FCcutoff=5, pvalcutoff=0.05, numlabelled = 3){
+plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", "Protein"), comp.idx, FCcutoff=1.5, pvalcutoff=0.05, numlabelled = 0){
 
   #TO DO: clarify if specifying peptide or protein is necessary
 
@@ -25,10 +25,10 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
                         ifelse(is.na(volcdat$pval), "no",
                                ifelse(abs(volcdat$FC)>FCcutoff, "yes", "no")))
   volcdat$rowname <- rownames(volcdat)
-  subset <- subset(volcdat, volcdat$sig == "yes")
-  subset <- subset[order(abs(subset$FC), decreasing = TRUE),]
-  if (numlabelled > nrow(subset)) {
-    numlabelled <- nrow(subset)
+  subsig <- subset(volcdat, volcdat$sig == "yes")
+  subsig <- subsig[order(abs(subsig$pval), decreasing = FALSE),]
+  if (numlabelled > nrow(subsig)) {
+    numlabelled <- nrow(subsig)
   }
 
   xmin <- floor(summary(volcdat$FC)[1][[1]])
@@ -45,20 +45,24 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
   ybreaks <- append(ybreaks, -log10(pvalcutoff))
   ybreakcol <- c(rep("black", length(ybreaks)-1), "red")
 
-  ggplot(volcdat, aes(x = FC, y = -log10(pval), col = sig, label = labs)) +
+  plot <- ggplot(volcdat, aes(x = FC, y = -log10(pval), col = sig)) +
     geom_point(show.legend = F) + # can show legend if wanting to
     theme_classic() +
     scale_x_continuous(breaks = xbreaks, labels = c(as.integer(xbreaks[1:(length(xbreaks)-2)]), -FCcutoff, FCcutoff), limits = c(xmin,xmax)) +
     # if pvalcutoff is 0.01 or is same as other break, will be overlapped on graph
-    scale_y_continuous(breaks = ybreaks, labels = c(ybreaks[1:(length(ybreaks)-1)], paste0("(", pvalcutoff, ")")), limits = c(ymin,ymax)) +
+    scale_y_continuous(breaks = ybreaks, labels = c(ybreaks[1:(length(ybreaks)-1)], paste0("(", pvalcutoff, ")")), limits = c(0,ymax)) +
     geom_hline(yintercept = -log10(pvalcutoff), linetype = "dashed", alpha = 0.4, col = "red") +
     geom_vline(xintercept = c(-FCcutoff, FCcutoff), linetype = "dashed", alpha = 0.4, col = "red") +
     scale_color_manual(values = c("no" = "gray70", "yes" = "red")) +
     theme(text = element_text(size = 16),
-          axis.text.x = element_text(color = xbreakcol),
-          axis.text.y = element_text(color = ybreakcol),
+          axis.text.x = element_text(color = as.character(xbreakcol)),
+          axis.text.y = element_text(color = as.character(ybreakcol)),
           plot.title = element_text(hjust = 0.5)) +
-    geom_label_repel(data = subset[1:numlabelled,], aes(label = rowname), fill = NA, col = "black", show.legend = F, nudge_x = 0.2, nudge_y = 0.1) +
+    geom_label_repel(data = subsig[1:numlabelled,], aes(label = rowname), fill = NA, col = "black", show.legend = F, nudge_x = 0.2, nudge_y = 0.1) +
     labs(x = expression("Fold change (log"[2]*")"), y = expression("-log"[10]~"(p-value)"),
          title = title)
+
+  png(paste0("Volcano plot - comp ", comp.idx, ".png"), res = 300, height = 2500, width = 3000)
+  print(plot)
+  dev.off()
 }
