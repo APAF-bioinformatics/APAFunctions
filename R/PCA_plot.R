@@ -5,7 +5,7 @@
 #' @param pca.components The output of PCA_calc()
 #' @param Group Group information for each column from PCA_calc() input (usually prot.ag). No replicate information.
 #'
-PCA_plot <- function(exp, pca.components, data, Group){
+PCA_plot <- function(exp=c("SWATH", "TMT"), data, pca.components, Group){
   grp_colors = rainbow(nlevels(Group))
   z <- pca.components$componentScores
 

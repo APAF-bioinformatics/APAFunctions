@@ -3,7 +3,6 @@
 #' @param data
 #' @param replicate
 #'
-#' @examples
 make_CVs <- function(data, replicate) {
   cvs = matrix(NA, nrow=nrow(data), ncol=nlevels(as.factor(replicate) ))
   colnames(cvs) = levels(as.factor(replicate))

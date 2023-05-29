@@ -2,11 +2,11 @@
 #'
 #' @param exp the experiment type
 #' @param data for TMT this is the ion data matrix
-#' @param normalization
+#' @param normalization  The types of normalisation from APAFunctions::normalize() should  be listed here, but those are yet to be finalised
 #' @param design the processed design file object that contains labels
 #' @param Group groups that is represented as factors
 #'
-plotBoxPlots <- function(exp, data, normalization, design, Group){
+plotBoxPlots <- function(exp=c("SWATH", "TMT"), data, normalization, design, Group){
   grp_colors = rainbow(nlevels(Group))
 
   if (exp == "SWATH"){

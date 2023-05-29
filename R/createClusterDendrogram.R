@@ -1,15 +1,15 @@
-#' Makes CLUST1Gene dendrogram, but also ClusterExpressionProfiles? TO DO: sort out who does what between this and HClust()
+#' TO DO: merge this with plotColouredDendrogram and Hclust()
 #'
-#' @param res1  Dunno, this should be renamed here and in the main script
+#' @param HClust_res  Dunno, this should be renamed here and in the main script
 #' @param Cluster
 #' @param cluster.data
 #' @param clusterMetric
 #' @param Anova.idx
 #' @param Group
 #'
-createClusterDendrogram <- function(res1, cluster.data, clusterMetric, Cluster, Anova.idx, Group){
+createClusterDendrogram <- function(HClust_res, cluster.data, clusterMetric, Cluster, Anova.idx, Group){
   png("CLUST1Genes.png", 1000, 1000)
-  clustID <- res1$clustID
+  clustID <- HClust_res$clustID
   Cluster[Anova.idx] = clustID
   res <- HClust((cluster.data), metric=clusterMetric, method="complete", clabel=clustID) # Oh no, I think HClust is making CLUST1Genes. Separate out clust_calc() and clust_plot()
   dev.off()

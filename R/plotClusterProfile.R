@@ -1,4 +1,4 @@
-#' plotClusterProfile
+#' TO DO: drop the overlaid data labels
 #'
 #' @param cluster.data
 #' @param clustID
@@ -6,10 +6,6 @@
 #' @param k
 #' @param ylab
 #'
-#' @return
-#' @export
-#'
-#' TO DO: drop the overlaid data labels
 plotClusterProfile <- function(cluster.data, clustID, Group, k=4, ylab="Abundance") {
   # TO DO: refactor this
   cluster.data <- log(scaled.cluster.data)
@@ -28,7 +24,6 @@ plotClusterProfile <- function(cluster.data, clustID, Group, k=4, ylab="Abundanc
   layout(matrix(1:4, ncol=2, byrow=TRUE))
   for(i in 1:numClusters) {
     colors <- rainbow(4)
-    # cols <- rep("gray", 6)
     gname <-  paste("Cluster", i, "(", ag.counts[i], "proteins )")
     lines <- ag.sample[, clustID==i, drop=FALSE]
     plotErrorBarsLines(ag.matrix[i,], 2*ag.bars[i,], lines,

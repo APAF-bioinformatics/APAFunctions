@@ -5,11 +5,11 @@
 #' @param FCcol Column index for Fold Change values
 #' @param pvalcol Column index for pvalues
 #' @param tabName Tab name, specify each time to avoid overwriting previous tabs
-#' @param hiCutoff Default 1.5
-#' @param lowCutoff Default 0.67
-#' @param pvalCutoff Default 0.05
+#' @param hicutoff Default 1.5
+#' @param lowcutoff Default 0.67
+#' @param pvalcutoff Default 0.05
 #'
-printxlsxDataSheet <- function(wb, data, FCcol, pvalcol, tabName = "results", hiCutoff = 1.5, lowCutoff=0.67, pvalCutoff=0.05) {
+printxlsxDataSheet <- function(wb, data, FCcol, pvalcol, tabName = "results", hicutoff = 1.5, lowcutoff=0.67, pvalcutoff=0.05) {
 #TO DO: colour the ID column in grey and header row in blue like in SimpleSheet()
   addWorksheet(wb, sheet=tabName)
   header <- createStyle(fgFill = "lightblue")
@@ -24,16 +24,16 @@ printxlsxDataSheet <- function(wb, data, FCcol, pvalcol, tabName = "results", hi
 
   # style the sheet
   for (ratio in FCcol) {
-    up.idx <- which(!is.na(data[, ratio]) & (data[, ratio] > hiCutoff))
+    up.idx <- which(!is.na(data[, ratio]) & (data[, ratio] > hicutoff))
     if (length(up.idx) > 1)
       addStyle(wb, tabName, style=upReg, rows = 1 + up.idx, cols = ratio, gridExpand=T)
 
-    down.idx <- which(!is.na(data[, ratio]) & (data[, ratio] < lowCutoff))
+    down.idx <- which(!is.na(data[, ratio]) & (data[, ratio] < lowcutoff))
     if (length(down.idx) > 1)
       addStyle(wb, tabName, style=downReg, rows = 1 + down.idx, cols = ratio, gridExpand=T)
   }
   for (pval in pvalcol) {
-    sig.idx <- which(!is.na(data[, pval]) & (data[, pval] < pvalCutoff))
+    sig.idx <- which(!is.na(data[, pval]) & (data[, pval] < pvalcutoff))
     if (length(sig.idx) > 1)
       addStyle(wb, tabName, style=sigStyle, rows = 1 + sig.idx, cols = pval, gridExpand=T)
   }

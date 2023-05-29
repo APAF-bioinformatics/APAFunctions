@@ -2,10 +2,10 @@
 #' --clean argument should have a flag for the search engine used, e.g. MaxQuant or Protein Discoverer. Version numbers matter as well.
 #'
 #' @param exp
-#' @param filelist
 #' @param data
+#' @param filelist
 #'
-clean <- function(exp, filelist, data) {
+clean <- function(exp=c("SWATH", "TMT"), data, filelist) {
 
   # if (exp == "TMT"){
   #   file.list = lapply(file.list, function(x) {dat1 = x[!duplicated(x$Accession),]

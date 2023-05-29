@@ -27,7 +27,7 @@ createResultsxlsx <- function(exp = c("SWATH, TMT"), inputlist){ #Currently no d
 
     # TO DO: The rowname changes from Accession to Sample (with multiple types of naming). Decide on which to use
     wb <- createWorkbook("ReultsOverall.xlsx")
-    ps <- try(printxlsxDataSheet(wb, data = full.res, FCcol=grep("MaxFC", names(full.res)), pvalcol=c(grep("Anova", names(full.res))), tabName = "AllData", hiCutoff=FCCutoff, lowCutoff=1/FCCutoff, pvalcutoff))
+    ps <- try(printxlsxDataSheet(wb, data = full.res, FCcol=grep("MaxFC", names(full.res)), pvalcol=c(grep("Anova", names(full.res))), tabName = "AllData", hicutoff=FCcutoff, lowcutoff=1/FCcutoff, pvalcutoff))
     if(inherits(ps, 'try-error') ) warning('Error with print overall xlsx file')
     ps <- try(printxlsInfoSheet(wb, tabName = "PCAScores", file = data.frame(rownames(pca.components$componentScores), pca.components$componentScores)))
     if(inherits(ps, 'try-error') ) warning('Error with print overall PCA component scores tab')
@@ -52,8 +52,8 @@ createResultsxlsx <- function(exp = c("SWATH, TMT"), inputlist){ #Currently no d
       dat.tmp = dat.tmp[order(dat.tmp$Significant, decreasing=TRUE), ] # sort by significant
       printxlsxDataSheet(wb, data = dat.tmp, FCcol = grep('FC', names(tarcompres.list[[idx.comp]][[1]])),
                          pvalcol = grep('TwoSplTTest', names(tarcompres.list[[idx.comp]][[1]])),
-                         tabName = tarcompres.list[[idx.comp]]$ComparisonName, hiCutoff = FCCutoff,
-                         lowCutoff = 1/FCCutoff, pvalcutoff)
+                         tabName = tarcompres.list[[idx.comp]]$ComparisonName, hicutoff = FCcutoff,
+                         lowcutoff = 1/FCcutoff, pvalcutoff)
     }
 
     addWorksheet(wb, sheet='images') # TMT images sheet to put volcano plots into

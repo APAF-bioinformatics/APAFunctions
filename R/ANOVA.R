@@ -2,9 +2,9 @@
 #'
 #' @param data
 #' @param Group
-#' @param FCCutoff
+#' @param FCcutoff
 #' @param pvalcutoff
-ANOVA <- function(data, Group, FCCutoff, pvalcutoff) {
+ANOVA <- function(data, Group, FCcutoff, pvalcutoff) {
   Anova = rep(NA, nrow(data))
 
   data.ag = aggregate(t(data), by=list(Group=Group), FUN=function(v){exp(mean(log(na.omit(v))))})
@@ -20,7 +20,7 @@ ANOVA <- function(data, Group, FCCutoff, pvalcutoff) {
   }
 
   Anova.adj = p.adjust(Anova, method = "fdr")
-  Anova.idx = !is.na(MaxFC) & (MaxFC > FCCutoff) & !is.na(Anova) & (Anova < pvalcutoff)
+  Anova.idx = !is.na(MaxFC) & (MaxFC > FCcutoff) & !is.na(Anova) & (Anova < pvalcutoff)
 
   return(list(Anova=Anova, Anova.adj=Anova.adj, Anova.idx=Anova.idx, Means=Means, MaxFC=MaxFC))
 }

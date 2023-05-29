@@ -7,7 +7,7 @@
 #'
 #' @return data_norm the normalised data. The type of normalisation depends on the experiment and the normalization environment variable set through --normalization
 #'
-normalize <- function(exp, data_raw, normalization, Group){
+normalize <- function(exp=c("SWATH", "TMT"), data_raw, normalization, Group){
   ## KR - I don't think it make senses to me to do multiple normalisations using, e.g., --normalize="Total+IRS", but leaving for now.
 
   if((grepl("Total", normalization) == TRUE)) {

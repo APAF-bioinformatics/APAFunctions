@@ -5,7 +5,7 @@
 #'
 plotCorrelationPlots <- function(data, Group){
 
-  # This function is just used to run pairs()
+  # Set up the panel layout and format for the correlation plots
   panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
   {
     usr <- par("usr"); on.exit(par(usr))

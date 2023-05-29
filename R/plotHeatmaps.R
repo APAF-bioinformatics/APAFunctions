@@ -1,13 +1,13 @@
 #' Plots a heatmap with either euclidean or cor distance; ANOVA or no ANOVA
 #'
-#' @param exp SWATH or TMT at the moment, but this should be joined together
+#' @param exp SWATH or TMT at the moment
 #' @param Anova.idx index of where significant ANOVA values are
-#' @param data either data (list of normalised ion data from TMT) or prot.ag (table with Protein name and intensities by group)
-#' @param dist either [euclidean or cordist]
+#' @param data ion data: either in the format of a list of normalised ion data matrix from TMT, or prot.ag (table with Protein name and intensities by group) in SWATH
+#' @param dist distance function either [euclidean or cordist]
 #' @param Group Group for the labels
 #' @param useAnova whether ANOVA has been preformed
 #'
-plotHeatmaps <- function(exp, data, Group, dist, Anova.idx=NULL, useAnova=FALSE){
+plotHeatmaps <- function(exp=c("SWATH", "TMT"), data, Group, dist, Anova.idx=NULL, useAnova=FALSE){
   Group <- as.factor(Group)
   grp_colors = rainbow(nlevels(Group))
   if (exp == "TMT") {

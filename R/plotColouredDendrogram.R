@@ -1,4 +1,4 @@
-#' plot a dendrogram, normally called after HClust()
+#' plot a dendrogram, normally called after HClust(). TO DO: merge with APAFunctions::createClusterDendrogram. Maybe use ggplot
 #'
 #' @param hclust_result The hclust_results of the HClust() function
 #' @param glabel Group labels
