@@ -8,8 +8,9 @@
 #' @param hicutoff Default 1.5
 #' @param lowcutoff Default 0.67
 #' @param pvalcutoff Default 0.05
+#' @param protect Should this sheet be protected from editing by the user?
 #'
-printxlsxDataSheet <- function(wb, data, FCcol, pvalcol, tabName = "results", hicutoff = 1.5, lowcutoff=0.67, pvalcutoff=0.05) {
+printxlsxDataSheet <- function(wb, data, FCcol, pvalcol, tabName="results", hicutoff=1.5, lowcutoff=0.67, pvalcutoff=0.05, protect=FALSE) {
 #TO DO: colour the ID column in grey and header row in blue like in SimpleSheet()
   addWorksheet(wb, sheet=tabName)
   header <- createStyle(fgFill = "lightblue")
@@ -40,4 +41,9 @@ printxlsxDataSheet <- function(wb, data, FCcol, pvalcol, tabName = "results", hi
   # Consistent with SimpleSheet
   addStyle(wb, sheet = tabName, style = header, rows = 1, cols = 1:ncol(data), gridExpand=T)
   addStyle(wb, sheet = tabName, style = firstCol, rows = 2:(nrow(data)+1), cols = 1)
+
+  if ( protect == TRUE ){
+    protectWorksheet(wb, sheet = tabName)
+  }
+
 }
