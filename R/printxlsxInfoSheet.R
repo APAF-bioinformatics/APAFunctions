@@ -4,7 +4,7 @@
 #' @param tabName Name of tab for results file. 'Key' will insert the SWATH column fields.
 #' @param file The file associated with the input data for the tab. Not required for 'Key'.
 #'
-printxlsInfoSheet <- function(wb, tabName, file) {
+printxlsxInfoSheet <- function(wb, tabName, file) {
   addWorksheet(wb, sheet = tabName)
   header <- createStyle(fgFill = "lightblue")
   firstCol <- createStyle(fgFill = "gray90")

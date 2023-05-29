@@ -23,23 +23,6 @@ createResultsImagexlsx <- function(exp = c("SWATH", "TMT")){
     openxlsx::saveWorkbook(wb, file="Results_Images.xlsx",  overwrite=T)
   } else if (exp == "TMT") {
     print("Nothing quite yet")
-
-    #################################
-    # Runs t tests then prints images
-
-    # # images
-    # addWorksheet(wb, sheet='images')
-    # startCol = 1
-    # for(idx.comp in 1:length(tarcompres.list)) {
-    #   if(file.exists(paste('Volcano plot for targeted', dat.comparisons[idx.comp,1], '.png', sep=''))) {
-    #     insertImage(wb, sheet='images',
-    #                 file=paste('Volcano plot for targeted', dat.comparisons[idx.comp,1], '.png', sep=''),
-    #                 width=12, height=15, startRow=2, startCol=startCol, units='cm')
-    #     startCol = startCol + 10
-    #   }
-    # }
-    # # comparisons
-    # printxlsInfoSheet(wb, tabName = 'Comparisons', dat.comparisons)
-    # saveWorkbook(wb, file="ResultsTargeted2tail.xlsx", overwrite=TRUE)
-  }
+  
+	}
 }
