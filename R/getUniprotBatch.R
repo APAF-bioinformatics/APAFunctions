@@ -59,5 +59,5 @@ getUniprotBatch = function(values=IDList, attributes=c("accession", "protein_nam
       res_final <- rbind(res_final, res)
     }
   }
-  data.frame(res_final)
+  return(data.frame(res_final))
 }
