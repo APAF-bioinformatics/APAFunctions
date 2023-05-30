@@ -62,7 +62,7 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
     labs(x = expression("Fold change (log"[2]*")"), y = expression("-log"[10]~"(p-value)"),
          title = title)
 
-  png(paste0("Volcano plot - comp ", comp.idx, ",png"), res = 300, height = 2500, width = 3000)
+  png(paste0("Volcano plot - comp ", comp.idx, ".png"), res = 300, height = 2500, width = 3000)
   print(plot)
   dev.off()
 }
