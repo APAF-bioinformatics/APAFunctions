@@ -53,7 +53,8 @@ getUniprotBatch = function(values=IDList, attributes=c("accession", "protein_nam
         jobId <- stringr::str_match(response, "\"jobId\":\"([^\"]*)\"")[, 2]
         url <- paste0("https://rest.uniprot.org/idmapping/uniprotkb/results/stream/", jobId)
         Sys.sleep(5) # TO DO: This sleep time is arbitrary, there is a way to check if the request is done https://www.uniprot.org/help/id_mapping [Fetching details about a job]
-        out <- fromJSON(url)
+        jsonfile <- getURI(url)
+        out <- fromJSON(jsonfile)
         acc <- out$results$to$primaryAccession
       }
       res_final <- rbind(res_final, res)
