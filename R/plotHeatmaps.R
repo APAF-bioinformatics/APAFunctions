@@ -56,7 +56,7 @@ plotHeatmaps <- function(exp=c("SWATH", "TMT"), data, Group, dist, Anova.idx=NUL
     else { stop("Heatmap currently only supports euclidean or cor distances")}
     par(oma=c(0,0,1,0))
     heatmap(x, col=colorRampPalette(c("green", "red"))(120),  margins=c(8,5), cexRow=1, distfun=disfun,
-            ColSideColors=grp_colors[Group], labRow = NA, main = maintitle, labRow = F)
+            ColSideColors=grp_colors[Group], main = maintitle, labRow = F)
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group))
     dev.off()
   }
