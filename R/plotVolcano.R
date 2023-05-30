@@ -45,8 +45,7 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
   ybreaks <- append(ybreaks, -log10(pvalcutoff))
   ybreakcol <- c(rep("black", length(ybreaks)-1), "red")
 
-  png(paste0("Volcano plot - comp ", comp.idx), res = 300, height = 2500, width = 3000)
-  ggplot(volcdat, aes(x = FC, y = -log10(pval), col = sig, label = labs)) +
+  plot <- ggplot(volcdat, aes(x = FC, y = -log10(pval), col = sig, label = labs)) +
     geom_point(show.legend = F) + # can show legend if wanting to
     theme_classic() +
     scale_x_continuous(breaks = xbreaks, labels = c(as.integer(xbreaks[1:(length(xbreaks)-2)]), -FCcutoff, FCcutoff), limits = c(xmin,xmax)) +
@@ -62,5 +61,8 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
     geom_label_repel(data = subset[1:numlabelled,], aes(label = rowname), fill = NA, col = "black", show.legend = F, nudge_x = 0.2, nudge_y = 0.1) +
     labs(x = expression("Fold change (log"[2]*")"), y = expression("-log"[10]~"(p-value)"),
          title = title)
+
+  png(paste0("Volcano plot - comp ", comp.idx), res = 300, height = 2500, width = 3000)
+  print(plot)
   dev.off()
 }
