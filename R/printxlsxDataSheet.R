@@ -9,9 +9,10 @@
 #' @param lowcutoff Default 0.67
 #' @param pvalcutoff Default 0.05
 #' @param protect Should this sheet be protected from editing by the user?
+#' @param pokemonGO to colour the GO terms based on a random Pokemon. Like we're back in the craze of 2016.
 #'
-printxlsxDataSheet <- function(wb, data, FCcol, pvalcol, tabName="results", hicutoff=1.5, lowcutoff=0.67, pvalcutoff=0.05, protect=FALSE) {
-#TO DO: colour the ID column in grey and header row in blue like in SimpleSheet()
+printxlsxDataSheet <- function(wb, data, FCcol, pvalcol, tabName="results", hicutoff=1.5, lowcutoff=0.67, pvalcutoff=0.05, protect=FALSE, pokemonGO=FALSE) {
+
   addWorksheet(wb, sheet=tabName)
   header <- createStyle(fgFill = "lightblue")
   firstCol <- createStyle(fgFill = "gray90")
@@ -19,6 +20,7 @@ printxlsxDataSheet <- function(wb, data, FCcol, pvalcol, tabName="results", hicu
   upReg <- createStyle(fgFill = "tomato")
   downReg <- createStyle(fgFill = "seagreen3")
   sigStyle <- createStyle(fgFill = "lightgoldenrod1")
+
 
   # put data in the sheet
   writeData(wb, tabName, data, keepNA=FALSE)
@@ -44,6 +46,15 @@ printxlsxDataSheet <- function(wb, data, FCcol, pvalcol, tabName="results", hicu
 
   if ( protect == TRUE ){
     protectWorksheet(wb, sheet = tabName)
+  }
+
+  if ( pokemonGO == TRUE ){ # Easter egg
+    pokemonidx <- sample.int(151, 1) # The original 151 are close to my heart
+    pokemonpalette <- pokepal(pokemon = pokemonidx, spread = 6)         # Some pokemon have small colourspaces
+    pokemonGOcolor <- createStyle(fgFill = pokemonpalette[sample.int(6, 1)])  # createStyle can only use one cell fg colour at a time.
+
+    GO_col_idx <- grep("GO", data[1,], value = FALSE)
+    addStyle(wb, sheet = tabName, style = pokemonGOcolor, rows = 1:nrow(data), cols = GO_col_idx, gridExpand=T)
   }
 
 }
