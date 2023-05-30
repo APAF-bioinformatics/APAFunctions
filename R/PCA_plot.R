@@ -19,10 +19,10 @@ PCA_plot <- function(exp=c("SWATH", "TMT"), data, pca.components, Group){
     dev.off()
 
     ## ggplot attempt
-    zm <- reshape2::melt(z, id.vars = rownames(z))
-
-    reshape2::melt(z, measure = patterns("PC1", "PC\\d"),
-         value.name = c("x", "y"), variable.name = "group")
+    # zm <- reshape2::melt(z, id.vars = rownames(z))
+    #
+    # reshape2::melt(z, measure = patterns("PC1", "PC\\d"),
+    #      value.name = c("x", "y"), variable.name = "group")
 
 
     cols <- rownames(pca.components$summary$x)

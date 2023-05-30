@@ -9,7 +9,7 @@
 #' @param FCcutoff  Fold Change cut off. Should be passed in from the script environment, but defaults to 1.5
 #' @param numlabelled Number of points to label on graph, chooses most extreme
 #'
-plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", "Protein"), comp.idx, FCcutoff=5, pvalcutoff=0.05, numlabelled = 3){
+plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", "Protein"), comp.idx, FCcutoff=1.5, pvalcutoff=0.05, numlabelled = 0){
 
   #TO DO: clarify if specifying peptide or protein is necessary
 
@@ -26,7 +26,7 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
                                ifelse(abs(volcdat$FC)>FCcutoff, "yes", "no")))
   volcdat$rowname <- rownames(volcdat)
   subset <- subset(volcdat, volcdat$sig == "yes")
-  subset <- subset[order(abs(subset$FC), decreasing = TRUE),]
+  subset <- subset[order(abs(subset$pval), decreasing = FALSE),]
   if (numlabelled > nrow(subset)) {
     numlabelled <- nrow(subset)
   }
