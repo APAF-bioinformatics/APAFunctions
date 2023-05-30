@@ -26,7 +26,7 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
                                ifelse(abs(volcdat$FC)>FCcutoff, "yes", "no")))
   volcdat$rowname <- rownames(volcdat)
   subsig <- subset(volcdat, volcdat$sig == "yes")
-  subsig <- subset[order(abs(subsig$pval), decreasing = FALSE),]
+  subsig <- subsig[order(abs(subsig$pval), decreasing = FALSE),]
   if (numlabelled > nrow(subsig)) {
     numlabelled <- nrow(subsig)
   }
