@@ -45,12 +45,13 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
   ybreaks <- append(ybreaks, -log10(pvalcutoff))
   ybreakcol <- c(rep("black", length(ybreaks)-1), "red")
 
+  png(paste0("Volcano plot - comp ", comp.idx), res = 300, height = 2500, width = 3000)
   ggplot(volcdat, aes(x = FC, y = -log10(pval), col = sig, label = labs)) +
     geom_point(show.legend = F) + # can show legend if wanting to
     theme_classic() +
     scale_x_continuous(breaks = xbreaks, labels = c(as.integer(xbreaks[1:(length(xbreaks)-2)]), -FCcutoff, FCcutoff), limits = c(xmin,xmax)) +
     # if pvalcutoff is 0.01 or is same as other break, will be overlapped on graph
-    scale_y_continuous(breaks = ybreaks, labels = c(ybreaks[1:(length(ybreaks)-1)], paste0("(", pvalcutoff, ")")), limits = c(ymin,ymax)) +
+    scale_y_continuous(breaks = ybreaks, labels = c(ybreaks[1:(length(ybreaks)-1)], paste0("(", pvalcutoff, ")")), limits = c(0,ymax)) +
     geom_hline(yintercept = -log10(pvalcutoff), linetype = "dashed", alpha = 0.4, col = "red") +
     geom_vline(xintercept = c(-FCcutoff, FCcutoff), linetype = "dashed", alpha = 0.4, col = "red") +
     scale_color_manual(values = c("no" = "gray70", "yes" = "red")) +
@@ -61,4 +62,5 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
     geom_label_repel(data = subset[1:numlabelled,], aes(label = rowname), fill = NA, col = "black", show.legend = F, nudge_x = 0.2, nudge_y = 0.1) +
     labs(x = expression("Fold change (log"[2]*")"), y = expression("-log"[10]~"(p-value)"),
          title = title)
+  dev.off()
 }
