@@ -26,7 +26,8 @@ PCA_plot <- function(exp=c("SWATH", "TMT"), data, pca.components, Group){
     text(z[,1], z[,3], cols, pos=3, cex=.5)
     plot(z[,2], z[,3], col=grp_colors[Group], pch=20, xlab="PC2", ylab="PC3")
     text(z[,2], z[,3], cols, pos=3, cex=.5)
-    boxplot(log(prot.ag[,-1]),par(las=2), pch = 20, main="Boxplots of log data")
+    data[data == 0] <- NA
+    boxplot(log(data),par(las=2), pch = 20, main="Boxplots of log data")
     dev.off()
   }
   else if (exp == "TMT")
