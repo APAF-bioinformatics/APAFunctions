@@ -17,10 +17,19 @@ PCA_plot <- function(exp=c("SWATH", "TMT"), data, pca.components, Group){
                xlab = "PC 3", ylab = "PC 2", zlab = "PC 1", distance = 0.1,
                main = "Projection in the space of the first 3 principal components"))
     dev.off()
+
+    ## ggplot attempt
+    zm <- reshape2::melt(z, id.vars = rownames(z))
+
+    reshape2::melt(z, measure = patterns("PC1", "PC\\d"),
+         value.name = c("x", "y"), variable.name = "group")
+
+
     cols <- rownames(pca.components$summary$x)
     png("PCA 2d - all.png", 2000, 2000, res=300)
     layout(matrix(1:4, nrow=2))
     plot(z[,1], z[,2], col=grp_colors[Group], pch=20, xlab="PC1", ylab="PC2")
+    ggplot(data = z, aes(x = ))
     text(z[,1], z[,2], cols, pos=3, cex=.5)
     plot(z[,1], z[,3], col=grp_colors[Group], pch=20, xlab="PC1", ylab="PC3")
     text(z[,1], z[,3], cols, pos=3, cex=.5)
@@ -30,8 +39,7 @@ PCA_plot <- function(exp=c("SWATH", "TMT"), data, pca.components, Group){
     boxplot(log(data),par(las=2), pch = 20, main="Boxplots of log data")
     dev.off()
   }
-  else if (exp == "TMT")
-  {
+  else if (exp == "TMT") {
     ld = pca.components$componentLoadings
     props = round(100*pca.components$summary$importance[2,1:3], 1)# proportion of variance of the top 3 components
 
