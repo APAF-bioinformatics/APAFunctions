@@ -6,6 +6,7 @@
 #' @param Group Group information for each column from PCA_calc() input (usually prot.ag). No replicate information.
 #'
 PCA_plot <- function(exp=c("SWATH", "TMT"), data, pca.components, Group){
+
   grp_colors = rainbow(nlevels(Group))
   z <- pca.components$componentScores
 
@@ -37,44 +38,47 @@ PCA_plot <- function(exp=c("SWATH", "TMT"), data, pca.components, Group){
     s3d <- scatterplot3d(z[,1:3], color=grp_colors[Group], col.axis=gray(0.85), col.grid="lightblue", box = T, angle = 26, pch=20)
     s3d$points3d(z[,1:3], pch=21)
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group), cex=.8)
-    text(s3d$xyz.convert(3+z[,1], 3+z[,2], z[,3]), labels = colnames(data), cex=0.4)
+    #text(s3d$xyz.convert(3+z[,1], 3+z[,2], z[,3]), labels = colnames(data), cex=0.4)
+    # removing labels - clutters graph too much
     dev.off()
 
-    ord.list = list()
     png("PCA2DAll.png", 2000, 2000, res=300)
     layout(matrix(1:4, ncol=2))
     plot(z[,1], z[,2], col=grp_colors[Group], pch=20, xlab=paste0("PC1(", props[1],"%)"), ylab=paste0("PC2(", props[2], "%)"))
     points(z[,1], z[,2], pch=21, cex=1.1, lwd=1.3)
-    text(z[,1], z[,2], colnames(data), pos=3, cex=.5)
+    #text(z[,1], z[,2], colnames(data), pos=3, cex=.5)
     plot(z[,1], z[,3], col=grp_colors[Group], pch=20, xlab=paste0("PC1(", props[1],"%)"), ylab=paste0("PC3(", props[3],"%)"))
     points(z[,1], z[,3], pch=21, cex=1.1, lwd=1.3)
-    text(z[,1], z[,3], colnames(data), pos=3, cex=.5)
+    #text(z[,1], z[,3], colnames(data), pos=3, cex=.5)
     plot(z[,2], z[,3], col=grp_colors[Group], pch=20, xlab=paste0("PC2(", props[2], "%)"), ylab=paste0("PC3(", props[3],"%)"))
     points(z[,2], z[,3], pch=21, cex=1.1, lwd=1.3)
-    text(z[,2], z[,3], colnames(data), pos=3, cex=.5)
+    #text(z[,2], z[,3], colnames(data), pos=3, cex=.5)
     plot(z[,2], z[,3], col=grp_colors[Group], pch=20, xlab="", ylab="", axes=FALSE, type='n')
     legend("center", fill=grp_colors[1:nlevels(Group)], legend=levels(Group))
     dev.off()
 
+    ord.list = list()
     png("PCATopLoadings.png", width=2000, height=700, res=300)
     par(oma=c(2,1,1,1))
     layout(matrix(1:3, nrow=1))
     for (i in 1:3) {
       ord = order(abs(ld[,i]), decreasing=TRUE)[1:5]
       barplot(sort(ld[ord, i]), las=2, main=paste("Top loadings PC", i))
-      ord.list[[i]]=ord
+      ord.list[[i]] = ord
     }
     dev.off()
 
     png("PCATopLoadingsProteinPatterns.png", width=2500, height=2500, res=300)
-    par(mar=c(5,2,3,1))
-    layout(matrix(1:15, nrow=3, byrow=T))
+    par(mar=c(5,3,3,1))
+    layout(matrix(1:15, nrow=3, ncol = 5, byrow=T))
     for (i in 1:3) {
       ord = ord.list[[i]]
       for (j in 1:5) {
-        boxplot(as.vector(as.matrix(data[match(rownames(ld)[ord[j]], rownames(data)),])) ~ Group, boxwex=0.5, main=rownames(ld)[ord[j]], col="gray", las=2)
+        matchprot <- rownames(ld)[ord[j]]
+        boxdat <- as.numeric(data[match(matchprot, rownames(data)),])
+        boxplot(boxdat ~ Group, boxwex=0.5, main=matchprot, col="gray", las=2, xlab = "")
       }
-      dev.off()
     }
+    dev.off()
   }
 }
