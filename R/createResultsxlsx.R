@@ -64,7 +64,7 @@ createResultsxlsx <- function(exp = c("SWATH, TMT"), inputlist){ #Currently no d
         startCol = startCol + 10
       }
     }
-    saveWorkbook(wb, file="ResultsTargeted3tail.xlsx", overwrite=TRUE)
+    saveWorkbook(wb, file="ResultsTargeted2tail.xlsx", overwrite=TRUE) # KR - pretty sure this should be 2tail not 3tail, to match the t-test
   }
 
 }
