@@ -12,7 +12,9 @@ printxlsxDataSheet(
   tabName = "results",
   hicutoff = 1.5,
   lowcutoff = 0.67,
-  pvalcutoff = 0.05
+  pvalcutoff = 0.05,
+  protect = FALSE,
+  pokemonGO = FALSE
 )
 }
 \arguments{
@@ -31,6 +33,10 @@ printxlsxDataSheet(
 \item{lowcutoff}{Default 0.67}
 
 \item{pvalcutoff}{Default 0.05}
+
+\item{protect}{Should this sheet be protected from editing by the user?}
+
+\item{pokemonGO}{to colour the GO terms based on a random Pokemon. Like we're back in the craze of 2016.}
 }
 \description{
 Set openxlsx style for comparisons and ANOVA table

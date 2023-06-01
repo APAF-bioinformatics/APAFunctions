@@ -10,7 +10,6 @@ HClust(
   metric = c("euclidean", "manhattan", "pearsonCorrelation"),
   scale = FALSE,
   method = c("single", "complete", "average"),
-  basefile = "hclust",
   glabel = row.names(data),
   clabel = NULL,
   cutNumber = NULL,
@@ -19,9 +18,9 @@ HClust(
 )
 }
 \arguments{
-\item{basefile}{the base name for the type of hclust method used: e.g. hclust-pearsonCorrelation-complete}
-
 \item{plot}{uses APAFunctions::plotColouredDendrogram(), defaults to TRUE}
+
+\item{basefile}{the base name for the type of hclust method used: e.g. hclust-pearsonCorrelation-complete}
 }
 \description{
 Clustering method. If plot == TRUE, it plots using APAFunctions::plotColouredDendrogram()

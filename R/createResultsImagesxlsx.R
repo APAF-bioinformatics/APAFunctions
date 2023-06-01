@@ -1,6 +1,7 @@
 #' Creates an Excel workbook with each image and a description. Doesn't require any arguments -- creating this workbook is self-contained
 #'
 createResultsImagexlsx <- function(exp = c("SWATH", "TMT")){
+
   if (exp == "SWATH") {
     Images = c("DataOverall", "PCA3D", "PCA 2D All",  "HeatmapEuclideanAll", "HeatmapCordist Anova DE", "ClusterExpressionProfiles")
     ImageNames = c("DataOverall.png", "PCA3D.png", "PCA 2d - all.png", "Heatmap euclidean - all.png", "Heatmap cordist - Anova DE.png", "ClusterExpressionProfiles.png")
@@ -21,8 +22,10 @@ createResultsImagexlsx <- function(exp = c("SWATH", "TMT")){
       try(insertImage(wb, img, ImageNames[img], startRow = 5,  startCol = 2, width=8, height=8))
     }
     openxlsx::saveWorkbook(wb, file="Results_Images.xlsx",  overwrite=T)
-  } else if (exp == "TMT") {
+  }
+
+  if (exp == "TMT") {
     print("Nothing quite yet")
-  
-	}
+  }
+
 }
