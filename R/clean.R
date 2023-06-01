@@ -5,7 +5,7 @@
 #' @param data
 #' @param filelist
 #'
-clean <- function(exp=c("SWATH", "TMT"), data, filelist) {
+clean <- function(exp=c("SWATH", "TMT"), data, filelist, searchengine, version) {
 
   
   # TO DO:
