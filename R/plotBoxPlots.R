@@ -54,6 +54,7 @@ plotBoxPlots <- function(exp=c("SWATH", "TMT"), data, normalization, design, Gro
     dat.ggplot <- melt(dat.ggplot, id.vars = "id")
     dat.ggplot$Label <- gsub(".*\\.", "", dat.ggplot$variable)
     dat.ggplot <- merge(dat.ggplot, designLong, by = "Label")
+    dat.ggplot$variable <- factor(dat.ggplot$variable, levels = colnames(data_norm))
     p2 <- ggplot(dat.ggplot, aes(x = variable, y = log2(value), fill = Group)) +
       geom_boxplot(show.legend = F) +
       theme_classic() +
