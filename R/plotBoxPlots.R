@@ -8,6 +8,7 @@
 #'
 #' @import grid
 #' @import gridBase
+#' @import patchwork
 #'
 plotBoxPlots <- function(exp=c("SWATH", "TMT"), data, normalization, design, Group){
   grp_colors = rainbow(nlevels(Group))
@@ -59,9 +60,10 @@ plotBoxPlots <- function(exp=c("SWATH", "TMT"), data, normalization, design, Gro
       theme(axis.text.x = element_text(hjust = 1, angle = 45)) +
       labs(x = "", y = "")
 
-    library(patchwork)
+    #library(patchwork)
+    plot <- p1+p2
     png("BoxplotDensity_GS.png", width = 3500, height = 1700, res = 300)
-    p1+p2
+    print(plot)
     dev.off()
 
     png("BoxplotDensity.png", width=3500, height=1700,res=300)
