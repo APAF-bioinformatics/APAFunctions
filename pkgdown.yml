@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2023-06-06T06:39Z
+last_built: 2023-06-06T06:52Z
 urls:
   reference: https://apaf-bioinformatics.github.io/APAFunctions/reference
   article: https://apaf-bioinformatics.github.io/APAFunctions/articles
