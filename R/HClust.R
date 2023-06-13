@@ -1,21 +1,21 @@
-#' Clustering method. If plot == TRUE, it plots using APAFunctions::plotColouredDendrogram()
+#' @title HClust
+#'
+#' @description Performs hierarchical clustering to cluster results. Outputs result in list along with method used.
 #'
 #' @param exp
 #' @param data
 #' @param metric
 #' @param scale
 #' @param method
-#' @param basefile the base name for the type of hclust method used: e.g. hclust-pearsonCorrelation-complete
 #' @param glabel
 #' @param clabel
 #' @param cutNumber
 #' @param cutHeight
-#' @param plot uses APAFunctions::plotColouredDendrogram(), defaults to TRUE
+#' @param plot uses APAFunctions::plotClusterDendrogram(), defaults to TRUE
 #'
 HClust <- function(data, metric = c("euclidean", "manhattan", "pearsonCorrelation"),
                     scale = FALSE, method = c("single", "complete", "average"),
-                    glabel = row.names(data), clabel = NULL,
-                    cutNumber = NULL, cutHeight = NULL, plot = TRUE) {
+                    glabel = row.names(data), cutNumber = NULL, cutHeight = NULL, plot = TRUE) {
 
     if (nrow(data) < 3) { stop("Need at least three samples for hierarchical clustering") }
     if ((!is.null(cutNumber)) && ((cutNumber < 2) || (cutNumber > nrow(data) - 1))) {
@@ -48,9 +48,6 @@ HClust <- function(data, metric = c("euclidean", "manhattan", "pearsonCorrelatio
     }
 
     clustID <- NULL
-    clustres_list <- list(merge = hclust_res$merge, height = hclust_res$height,
-                          order = hclust_res$order, labels = hclust_res$labels, method = hclust_res$method,
-                          dist.method = hclust_res$dist.method)
     if (!is.null(cutHeight)) {
       clustID <- as.vector(cutree(hclust_res, h = cutHeight))
       names(clustID) <- rownames(data)
@@ -59,7 +56,7 @@ HClust <- function(data, metric = c("euclidean", "manhattan", "pearsonCorrelatio
       clustID <- as.vector(cutree(hclust_res, k = cutNumber))
       names(clustID) <- rownames(data)
     }
-    return(list(clustID = clustID, clustres_list = clustres_list, method = method, metric = metric))
+    return(list(clustID = clustID, method = method, metric = metric))
 }
 
 
