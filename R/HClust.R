@@ -43,7 +43,7 @@ HClust <- function(data, metric = c("euclidean", "manhattan", "pearsonCorrelatio
 
     if (plot == TRUE) {
       png(paste0(paste("hclust", metric, method, sep = "_"), ".png"), res = 300, width = 3000, height = 2000)
-      plot(result, cex = 0.1, hang = -1)
+      plot(hclust_res, cex = 0.1, hang = -1)
       dev.off()
     }
 
