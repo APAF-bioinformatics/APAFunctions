@@ -30,7 +30,6 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
   if (numlabelled > nrow(subsig)) {
     numlabelled <- nrow(subsig)
   }
-
   xmin <- floor(summary(volcdat$FC)[1][[1]])
   xmax <- ceiling(summary(volcdat$FC)[6][[1]])
   if (FCcutoff > xmax){
@@ -58,7 +57,7 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
           axis.text.x = element_text(color = as.character(xbreakcol)),
           axis.text.y = element_text(color = as.character(ybreakcol)),
           plot.title = element_text(hjust = 0.5)) +
-    geom_label_repel(data = subsig[1:numlabelled,], aes(label = rowname), fill = NA, col = "black", show.legend = F, nudge_x = 0.2, nudge_y = 0.1) +
+    #geom_label_repel(data = subsig[1:numlabelled,], aes(label = rowname), fill = NA, col = "black", show.legend = F, nudge_x = 0.2, nudge_y = 0.1) +
     labs(x = expression("Fold change (log"[2]*")"), y = expression("-log"[10]~"(p-value)"),
          title = title)
 
