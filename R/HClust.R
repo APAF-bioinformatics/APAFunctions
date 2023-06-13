@@ -12,12 +12,11 @@
 #' @param cutHeight
 #' @param plot uses APAFunctions::plotColouredDendrogram(), defaults to TRUE
 #'
-HClust <- function (exp=c("SWATH", "TMT"), data, metric = c("euclidean", "manhattan", "pearsonCorrelation"),
+HClust <- function(data, metric = c("euclidean", "manhattan", "pearsonCorrelation"),
                     scale = FALSE, method = c("single", "complete", "average"),
                     glabel = row.names(data), clabel = NULL,
                     cutNumber = NULL, cutHeight = NULL, plot = TRUE) {
 
-  if (exp == "SWATH"){
     if (nrow(data) < 3) { stop("Need at least three samples for hierarchical clustering") }
     if ((!is.null(cutNumber)) && ((cutNumber < 2) || (cutNumber > nrow(data) - 1))) {
       cutNumber <- nrow(data) - 1
@@ -33,8 +32,7 @@ HClust <- function (exp=c("SWATH", "TMT"), data, metric = c("euclidean", "manhat
 
     if (metric == "pearsonCorrelation") {
       d <- as.dist((1 - cor(t(data)))/2)
-    }
-    else { # any other distance metric, these are already defined in the stats library
+    } else { # any other distance metric, these are already defined in the stats library
       d <- try(dist(data, method = metric), silent = TRUE) # stats::dist() allows the methods "euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski"
       if (inherits(d, "try-error")) { Error("Failed to create distance Matrix") }
     }
@@ -42,10 +40,13 @@ HClust <- function (exp=c("SWATH", "TMT"), data, metric = c("euclidean", "manhat
     hclust_res <- try(hclust(d, method = method), silent = TRUE) # processing ultimately comes from stats::hclust()
 
     if (inherits(hclust_res, "try-error")) { stop("Failed to Calculate Cluster Tree") }
-    #hplot <- paste(basefile, metric, method, sep = "-") # Is this object used elsewhere?
+
     if (plot == TRUE) {
-      plotClusterDendrogram(exp, hclust_res, glabel = glabel, clabel = clabel, sub = paste("method = ", method), xlab = "Assays")
+      png(paste0(paste("hclust", metric, method, sep = "_"), ".png"), res = 300, width = 3000, height = 2000)
+      plot(result, cex = 0.1, hang = -1)
+      dev.off()
     }
+
     clustID <- NULL
     clustres_list <- list(merge = hclust_res$merge, height = hclust_res$height,
                           order = hclust_res$order, labels = hclust_res$labels, method = hclust_res$method,
@@ -59,7 +60,6 @@ HClust <- function (exp=c("SWATH", "TMT"), data, metric = c("euclidean", "manhat
       names(clustID) <- rownames(data)
     }
     return(list(clustID = clustID, clustres_list = clustres_list, method = method, metric = metric))
-  }
 }
 
 
