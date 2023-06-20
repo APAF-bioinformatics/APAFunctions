@@ -1,35 +1,31 @@
 #' The Volcano plot function for all APAF scripts
 #'
-#' @param exp SWATH or TMT
+#' @param experiment SWATH or TMT
 #' @param FC
 #' @param pval
 #' @param PeporProt Specify 'Protein' or 'Peptide' depending on the plot. No other options are accepted
 #' @param comp.idx
 #' @param pvalcutoff
 #' @param FCcutoff  Fold Change cut off. Should be passed in from the script environment, but defaults to 1.5
-#' @param numlabelled Number of points to label on graph, chooses most extreme
+#' @param interactive TRUE or FALSE to plot an interactive volcano plot into a HTML file
 #'
-plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", "Protein"), comp.idx, FCcutoff=1.5, pvalcutoff=0.05, numlabelled = 0){
+plotVolcano <- function(experiment=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", "Protein"), comp.idx, FCcutoff=1.5, pvalcutoff=0.05, saveInteractive = TRUE){
 
-  #TO DO: clarify if specifying peptide or protein is necessary
+  savename <- paste0(paste0(PeporProt, " volcano plot - comp", comp.idx))
+  if (experiment == "TMT"){
+    title = paste0("TMT: ", savename)
+  } else if (experiment == "SWATH") {
+    title = paste0("SWATH: ", savename)
+  } else { title = "We haven't covered this exp yet" }
 
-  if (exp == "TMT"){
-    title = "Hello, I'm TMT"
-  } else if (exp == "SWATH") {
-    title = "Hello, I'm SWATH"
-  } else { title = "We haven't covered this exp yet, oops" }
-
-  volcdat <- data.frame(FC = log2(FC), pval = pval)
+  volcdat <- data.frame(FC = log2(FC), pval = pval, names = names)
   #volcdat$annot <- rownames(volcdat)
   volcdat$sig <- ifelse(volcdat$pval>pvalcutoff, "no",
                         ifelse(is.na(volcdat$pval), "no",
                                ifelse(abs(volcdat$FC)>FCcutoff, "yes", "no")))
-  volcdat$rowname <- rownames(volcdat)
   subsig <- subset(volcdat, volcdat$sig == "yes")
   subsig <- subsig[order(abs(subsig$pval), decreasing = FALSE),]
-  if (numlabelled > nrow(subsig)) {
-    numlabelled <- nrow(subsig)
-  }
+
   xmin <- floor(summary(volcdat$FC)[1][[1]])
   xmax <- ceiling(summary(volcdat$FC)[6][[1]])
   if (FCcutoff > xmax){
@@ -44,8 +40,8 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
   ybreaks <- append(ybreaks, -log10(pvalcutoff))
   ybreakcol <- c(rep("black", length(ybreaks)-1), "red")
 
-  plot <- ggplot(volcdat, aes(x = FC, y = -log10(pval), col = sig)) +
-    geom_point(show.legend = F) + # can show legend if wanting to
+  plot <- ggplot(volcdat, aes(x = FC, y = -log10(pval), col = sig, text = names)) +
+    geom_point(show.legend = F) +
     theme_classic() +
     scale_x_continuous(breaks = xbreaks, labels = c(as.integer(xbreaks[1:(length(xbreaks)-2)]), -FCcutoff, FCcutoff), limits = c(xmin,xmax)) +
     # if pvalcutoff is 0.01 or is same as other break, will be overlapped on graph
@@ -56,12 +52,17 @@ plotVolcano <- function(exp=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", 
     theme(text = element_text(size = 16),
           axis.text.x = element_text(color = as.character(xbreakcol)),
           axis.text.y = element_text(color = as.character(ybreakcol)),
-          plot.title = element_text(hjust = 0.5)) +
-    #geom_label_repel(data = subsig[1:numlabelled,], aes(label = rowname), fill = NA, col = "black", show.legend = F, nudge_x = 0.2, nudge_y = 0.1) +
-    labs(x = expression("Fold change (log"[2]*")"), y = expression("-log"[10]~"(p-value)"),
-         title = title)
+          plot.title = element_text(hjust = 0.5))
+  #labs(x = expression("Fold change (log"[2]*")"), y = expression("-log"[10]~"(p-value)"),
+  #     title = title)
+  plotpng <- plot + labs(x = expression("Fold change (log"[2]*")"), y = expression("-log"[10]~"(p-value)"), title = title)
+  plotint <- plot + labs(x = "Fold change (log2)", y = "-log10(p-value)", title = title) + guides(col = FALSE)
 
-  png(paste0("Volcano plot - comp ", comp.idx, ".png"), res = 300, height = 2500, width = 3000)
-  print(plot)
+  png(paste0(savename, ".png"), res = 300, height = 2500, width = 3000)
+  print(plotpng)
   dev.off()
+
+  if (saveInteractive == TRUE){
+    htmlwidgets::saveWidget(ggplotly(plotint, tooltip = "names"), paste0(savename, "_interactive.html"))
+  }
 }

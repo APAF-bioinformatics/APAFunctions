@@ -5,24 +5,24 @@
 \title{The Volcano plot function for all APAF scripts}
 \usage{
 plotVolcano(
-  exp = c("SWATH", "TMT"),
+  experiment = c("SWATH", "TMT"),
   FC,
   pval,
   PeporProt = c("Peptide", "Protein"),
   comp.idx,
   FCcutoff = 1.5,
   pvalcutoff = 0.05,
-  numlabelled = 0
+  saveInteractive = TRUE
 )
 }
 \arguments{
-\item{exp}{SWATH or TMT}
+\item{experiment}{SWATH or TMT}
 
 \item{PeporProt}{Specify 'Protein' or 'Peptide' depending on the plot. No other options are accepted}
 
 \item{FCcutoff}{Fold Change cut off. Should be passed in from the script environment, but defaults to 1.5}
 
-\item{numlabelled}{Number of points to label on graph, chooses most extreme}
+\item{interactive}{TRUE or FALSE to plot an interactive volcano plot into a HTML file}
 }
 \description{
 The Volcano plot function for all APAF scripts

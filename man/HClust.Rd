@@ -2,26 +2,22 @@
 % Please edit documentation in R/HClust.R
 \name{HClust}
 \alias{HClust}
-\title{Clustering method. If plot == TRUE, it plots using APAFunctions::plotColouredDendrogram()}
+\title{HClust}
 \usage{
 HClust(
-  exp = c("SWATH", "TMT"),
   data,
   metric = c("euclidean", "manhattan", "pearsonCorrelation"),
   scale = FALSE,
   method = c("single", "complete", "average"),
   glabel = row.names(data),
-  clabel = NULL,
   cutNumber = NULL,
   cutHeight = NULL,
   plot = TRUE
 )
 }
 \arguments{
-\item{plot}{uses APAFunctions::plotColouredDendrogram(), defaults to TRUE}
-
-\item{basefile}{the base name for the type of hclust method used: e.g. hclust-pearsonCorrelation-complete}
+\item{plot}{uses APAFunctions::plotClusterDendrogram(), defaults to TRUE}
 }
 \description{
-Clustering method. If plot == TRUE, it plots using APAFunctions::plotColouredDendrogram()
+Performs hierarchical clustering to cluster results. Outputs result in list along with method used.
 }
