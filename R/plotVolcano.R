@@ -9,7 +9,7 @@
 #' @param FCcutoff  Fold Change cut off. Should be passed in from the script environment, but defaults to 1.5
 #' @param interactive TRUE or FALSE to plot an interactive volcano plot into a HTML file
 #'
-plotVolcano <- function(experiment=c("SWATH", "TMT"), FC, pval, PeporProt=c("Peptide", "Protein"), comp.idx, FCcutoff=1.5, pvalcutoff=0.05, saveInteractive = TRUE){
+plotVolcano <- function(experiment=c("SWATH", "TMT"), FC, pval, names, PeporProt=c("Peptide", "Protein"), comp.idx, FCcutoff=1.5, pvalcutoff=0.05, saveInteractive = TRUE){
 
   savename <- paste0(paste0(PeporProt, " volcano plot - comp", comp.idx))
   if (experiment == "TMT"){

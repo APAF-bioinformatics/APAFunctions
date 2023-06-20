@@ -8,6 +8,7 @@ plotVolcano(
   experiment = c("SWATH", "TMT"),
   FC,
   pval,
+  names,
   PeporProt = c("Peptide", "Protein"),
   comp.idx,
   FCcutoff = 1.5,
