@@ -5,7 +5,7 @@
 \title{Plots a heatmap with either euclidean or cor distance; ANOVA or no ANOVA}
 \usage{
 plotHeatmaps(
-  exp = c("SWATH", "TMT"),
+  experiment = c("SWATH", "TMT"),
   data,
   Group,
   dist,
@@ -14,7 +14,7 @@ plotHeatmaps(
 )
 }
 \arguments{
-\item{exp}{SWATH or TMT at the moment}
+\item{experiment}{SWATH or TMT at the moment}
 
 \item{data}{ion data: either in the format of a list of normalised ion data matrix from TMT, or prot.ag (table with Protein name and intensities by group) in SWATH}
 

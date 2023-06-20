@@ -5,7 +5,7 @@
 \title{The one function to plot dendrograms. Future: maybe rewrite with ggdendro?}
 \usage{
 plotClusterDendrogram(
-  exp = c("SWATH", "TMT"),
+  experiment = c("SWATH", "TMT"),
   hclust_result,
   cluster.data,
   Group,

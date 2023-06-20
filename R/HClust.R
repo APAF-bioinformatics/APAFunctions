@@ -2,13 +2,11 @@
 #'
 #' @description Performs hierarchical clustering to cluster results. Outputs result in list along with method used.
 #'
-#' @param exp
 #' @param data
 #' @param metric
 #' @param scale
 #' @param method
 #' @param glabel
-#' @param clabel
 #' @param cutNumber
 #' @param cutHeight
 #' @param plot uses APAFunctions::plotClusterDendrogram(), defaults to TRUE

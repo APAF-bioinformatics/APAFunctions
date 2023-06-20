@@ -1,16 +1,16 @@
 #' Generate 2D and 3D PCA plots
 #'
-#' @param exp Currently TMT or SWATH
+#' @param experiment Currently TMT or SWATH
 #' @param data Currently only used by TMT to get rownames
 #' @param pca.components The output of PCA_calc()
 #' @param Group Group information for each column from PCA_calc() input (usually prot.ag). No replicate information.
 #'
-PCA_plot <- function(exp=c("SWATH", "TMT"), data, pca.components, Group){
+PCA_plot <- function(experiment=c("SWATH", "TMT"), data, pca.components, Group){
 
   grp_colors = rainbow(nlevels(Group))
   z <- pca.components$componentScores
 
-  if (exp == "SWATH"){
+  if (experiment == "SWATH"){
     png("PCA3D.png", 2000, 2000, res=300)
     plot(cloud(z[, 1] ~ z[, 3] + z[, 2], groups = as.factor(Group),
                auto.key = list(points = TRUE, pch = 19, space = "right"),  #auto.key legend is ignoring pch styles, look into GGplot alternative
@@ -31,7 +31,7 @@ PCA_plot <- function(exp=c("SWATH", "TMT"), data, pca.components, Group){
     boxplot(log(data), par(las=2), pch = 20, main="Boxplots of log data", col = grp_colors[Group])
     dev.off()
   }
-  else if (exp == "TMT") {
+  else if (experiment == "TMT") {
     ld = pca.components$componentLoadings
     props = round(100*pca.components$summary$importance[2,1:3], 1)# proportion of variance of the top 3 components
 

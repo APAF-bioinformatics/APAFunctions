@@ -1,6 +1,6 @@
 #' The one function to plot dendrograms. Future: maybe rewrite with ggdendro?
 #'
-#' @param exp
+#' @param experiment
 #' @param hclust_result
 #' @param cluster.data
 #' @param Group
@@ -11,12 +11,12 @@
 #' @param clabel
 #' @param ...
 #'
-plotClusterDendrogram <- function (exp=c("SWATH", "TMT"), hclust_result, cluster.data, Group, clusterMetric, Cluster, Anova.idx,
+plotClusterDendrogram <- function (experiment=c("SWATH", "TMT"), hclust_result, cluster.data, Group, clusterMetric, Cluster, Anova.idx,
                                    glabel, clabel = NULL, ...) {
   # TO DO: The SwATH implementation can probably be written in ggplot::ggdendro. In TMT, the section formatting the plot if clabel exists is too long.
   # TO DO: atomic vector $ broken if plot=TRUE in HClust() which calls this function. Not broken if plot=FALSE
 
-  if ( exp == "SWATH") {
+  if ( experiment == "SWATH") {
     png("CLUST1Genes.png", 1000, 1000)
     clustID <- HClust_res$clustID
     Cluster[Anova.idx] = clustID
@@ -46,7 +46,7 @@ plotClusterDendrogram <- function (exp=c("SWATH", "TMT"), hclust_result, cluster
     }
   }
 
-  if ( exp == "TMT" ) {
+  if ( experiment == "TMT" ) {
     if (!is.null(clabel)) { # Lots of formating if there's a clabel, but this defaults to NULL
       clabel <- as.factor(as.vector(clabel))
       plotLegend(clabel)

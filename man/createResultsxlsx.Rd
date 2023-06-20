@@ -2,15 +2,15 @@
 % Please edit documentation in R/createResultsxlsx.R
 \name{createResultsxlsx}
 \alias{createResultsxlsx}
-\title{Creates an Excel workbook all results. Later it should format based upon experiment. TO DO: parameter values like normalization etc should be passed in}
+\title{Creates an Excel workbook all results. Later it should format based upon experiment. TO DO: parameter values like normalisation etc should be passed in}
 \usage{
-createResultsxlsx(exp = c("SWATH, TMT"), inputlist)
+createResultsxlsx(experiment = c("SWATH, TMT"), inputlist)
 }
 \arguments{
-\item{exp}{Either SWATH or TMT}
+\item{experiment}{Either SWATH or TMT}
 
 \item{inputlist}{A list of environment variables that containing info for Excel output tabs}
 }
 \description{
-Creates an Excel workbook all results. Later it should format based upon experiment. TO DO: parameter values like normalization etc should be passed in
+Creates an Excel workbook all results. Later it should format based upon experiment. TO DO: parameter values like normalisation etc should be passed in
 }

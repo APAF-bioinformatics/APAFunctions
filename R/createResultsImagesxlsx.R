@@ -1,13 +1,14 @@
 #' Creates an Excel workbook with each image and a description. Doesn't require any arguments -- creating this workbook is self-contained
 #'
-createResultsImagexlsx <- function(exp = c("SWATH", "TMT")){
+#' @param experiment SWATH or TMT
+createResultsImagexlsx <- function(experiment = c("SWATH", "TMT")){
 
-  if (exp == "SWATH") {
+  if (experiment == "SWATH") {
     Images = c("DataOverall", "PCA3D", "PCA 2D All",  "HeatmapEuclideanAll", "HeatmapCordist Anova DE", "ClusterExpressionProfiles")
     ImageNames = c("DataOverall.png", "PCA3D.png", "PCA 2d - all.png", "Heatmap euclidean - all.png", "Heatmap cordist - Anova DE.png", "ClusterExpressionProfiles.png")
-    ImageExplanations = c("DataOverall - contains density plots of the relative ion ratios with respect to the first sample, and boxplots of log ion peak areas, log transformed or normalized using the requested normalization.",
+    ImageExplanations = c("DataOverall - contains density plots of the relative ion ratios with respect to the first sample, and boxplots of log ion peak areas, log transformed or normalised using the requested normalisation.",
                           "PCA 3d: Principal component analysis 3D plot.",
-                          "PCA 2d: Plots from a PCA analysis carried out on normalized protein data , and a boxplot of the normalized protein level data.",
+                          "PCA 2d: Plots from a PCA analysis carried out on normalised protein data , and a boxplot of the normalised protein level data.",
                           "Heatmap Euclidean all contains the heatmap of all proteins (Euclidean metric)",
                           "Heamtap cordist - Anova DE contains the heatmap of the differentially expressed proteins from the Anova analysis ( p-value < cutoff and MaxFC > cutoff); correlation based metric",
                           "ClusterExpressionProfiles - shows the expression patterns of individual proteins, likewise only using those differentially expressed based on the Anova analysis.")
@@ -24,7 +25,7 @@ createResultsImagexlsx <- function(exp = c("SWATH", "TMT")){
     openxlsx::saveWorkbook(wb, file="Results_Images.xlsx",  overwrite=T)
   }
 
-  if (exp == "TMT") {
+  if (experiment == "TMT") {
     print("Nothing quite yet")
   }
 

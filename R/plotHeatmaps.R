@@ -1,16 +1,16 @@
 #' Plots a heatmap with either euclidean or cor distance; ANOVA or no ANOVA
 #'
-#' @param exp SWATH or TMT at the moment
+#' @param experiment SWATH or TMT at the moment
 #' @param Anova.idx index of where significant ANOVA values are
 #' @param data ion data: either in the format of a list of normalised ion data matrix from TMT, or prot.ag (table with Protein name and intensities by group) in SWATH
 #' @param dist distance function either [euclidean or cordist]
 #' @param Group Group for the labels
 #' @param useAnova whether ANOVA has been preformed
 #'
-plotHeatmaps <- function(exp=c("SWATH", "TMT"), data, Group, dist, Anova.idx=NULL, useAnova=FALSE){
+plotHeatmaps <- function(experiment=c("SWATH", "TMT"), data, Group, dist, Anova.idx=NULL, useAnova=FALSE){
   Group <- as.factor(Group)
   grp_colors = rainbow(nlevels(Group))
-  if (exp == "TMT") {
+  if (experiment == "TMT") {
     if (useAnova==TRUE) {
       if(nrow(data[Anova.idx,]) > 3) {
         x <- as.matrix(na.omit(log(data[Anova.idx,]+.5)))
@@ -28,7 +28,7 @@ plotHeatmaps <- function(exp=c("SWATH", "TMT"), data, Group, dist, Anova.idx=NUL
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group), xpd=TRUE,cex=.6)
     dev.off()
 
-  } else if (exp == "SWATH") {
+  } else if (experiment == "SWATH") {
     if (useAnova == TRUE){
       x <- as.matrix(log(na.omit(data[Anova.idx,-1]+1)))
     } else {

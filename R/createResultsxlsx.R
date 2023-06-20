@@ -1,11 +1,11 @@
-#' Creates an Excel workbook all results. Later it should format based upon experiment. TO DO: parameter values like normalization etc should be passed in
+#' Creates an Excel workbook all results. Later it should format based upon experiment. TO DO: parameter values like normalisation etc should be passed in
 #'
-#' @param exp Either SWATH or TMT
+#' @param experiment Either SWATH or TMT
 #' @param inputlist A list of environment variables that containing info for Excel output tabs
 #'
-createResultsxlsx <- function(exp = c("SWATH, TMT"), inputlist){ #Currently no defaults, you must supply all.
+createResultsxlsx <- function(experiment = c("SWATH, TMT"), inputlist){ #Currently no defaults, you must supply all.
 
-  if (exp == "SWATH") {
+  if (experiment == "SWATH") {
     wb <- createWorkbook("Results.xlsx")
     printxlsxInfoSheet(wb, tabName = "Key")
     for (i in 1:length(inputlist[["res.list"]])) {
@@ -22,7 +22,7 @@ createResultsxlsx <- function(exp = c("SWATH, TMT"), inputlist){ #Currently no d
     saveWorkbook(wb, file="Results.xlsx",  overwrite=T)
   }
 
-  if (exp == "TMT") {
+  if (experiment == "TMT") {
     full.res[full.res=='NaN'] = NA
 
     # TO DO: The rowname changes from Accession to Sample (with multiple types of naming). Decide on which to use

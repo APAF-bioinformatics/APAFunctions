@@ -5,7 +5,7 @@
 \title{Compute PCA, no plots}
 \usage{
 PCA_calc(
-  exp = c("SWATH", "TMT"),
+  experiment = c("SWATH", "TMT"),
   data,
   scaleR = FALSE,
   scaleC = TRUE,
@@ -13,7 +13,7 @@ PCA_calc(
 )
 }
 \arguments{
-\item{exp}{experiment: either SWATH or TMT}
+\item{experiment}{experiment: either SWATH or TMT}
 
 \item{data}{The prot.ag dataframe. Long format intensity? data with protein name as first column.}
 

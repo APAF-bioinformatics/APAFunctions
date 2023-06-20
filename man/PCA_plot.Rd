@@ -4,10 +4,10 @@
 \alias{PCA_plot}
 \title{Generate 2D and 3D PCA plots}
 \usage{
-PCA_plot(exp = c("SWATH", "TMT"), data, pca.components, Group)
+PCA_plot(experiment = c("SWATH", "TMT"), data, pca.components, Group)
 }
 \arguments{
-\item{exp}{Currently TMT or SWATH}
+\item{experiment}{Currently TMT or SWATH}
 
 \item{data}{Currently only used by TMT to get rownames}
 

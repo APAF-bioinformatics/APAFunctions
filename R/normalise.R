@@ -1,26 +1,24 @@
 #' Any normalisation of the data matrix applied to APAF data
 #'
-#' @param exp
-#' @param data_raw The un-normalized raw ion data matrix, as a list
-#' @param normalization comes from the --normalization flag and defaults to "total"
+#' @param data_raw The un-normalised raw ion data matrix, as a list
+#' @param normalisation comes from the --normalisation flag and defaults to "total"
 #' @param Group
 #'
 #' @return
 #'
-normalize <- function(exp=c("SWATH", "TMT"), data_raw, normalization, Group){
-  ## KR - I don't think it make senses to me to do multiple normalisations using, e.g., --normalize="Total+IRS", but leaving for now.
+normalise <- function(data_raw, normalisation, Group){
 
-  if((grepl("Total", normalization) == TRUE)) {
+  if((grepl("Total", normalisation) == TRUE)) {
     tot = apply(data_raw, 2, FUN = function(v){sum(na.omit(v))})
     data <- sweep(data_raw, 2, tot/max(tot), "/")
   }
 
-  if ((grepl("Median", normalization) == TRUE)) {
+  if ((grepl("Median", normalisation) == TRUE)) {
     tot = apply(data_raw, 2, function(x) median(na.omit(x)))
     data <- sweep(data_raw, 2, tot/max(tot), "/")
   }
 
-  if((grepl("IRS", normalization) == TRUE)) {
+  if((grepl("IRS", normalisation) == TRUE)) {
     list.exp = list()
     for(i in 1:length(list.dat)) {
       list.exp[[i]]=data[,grep(paste0("R",i), colnames(data))]
@@ -40,12 +38,12 @@ normalize <- function(exp=c("SWATH", "TMT"), data_raw, normalization, Group){
     irs.fac = sweep(irs, 1, rowsum.average, "/")
     list.irs.scaled = lapply(1:length(list.exp), function(x) sweep(list.exp[[x]], 1, irs.fac[,x], "/"))
 
-    # make new data frame with normalized data
+    # make new data frame with normalised data
     data <- list.irs.scaled[[1]]
     data <- as.data.frame(do.call("cbind", list.irs.scaled))
   }
 
-  if((grepl("MLR", normalization) == TRUE)) {
+  if((grepl("MLR", normalisation) == TRUE)) {
 
     Group = as.factor(Group)
     if (length(Group) != ncol(data_raw)) {stop("Matrix and group sizes don't match for mlr norm.")}

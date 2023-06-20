@@ -1,4 +1,4 @@
-#' TO DO: drop the overlaid data labels
+#' Plot cluster profile data
 #'
 #' @param cluster.data
 #' @param clustID
