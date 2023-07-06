@@ -27,7 +27,7 @@ plotBoxPlots <- function(experiment=c("SWATH", "TMT"), dataraw, datanorm, normal
     ldat[[i+2]] <- limmadat
 
     dat.ggplot <- dat
-    dat.ggplot$id <- rownames(data)
+    dat.ggplot$id <- rownames(dat)
     dat.ggplot <- melt(dat.ggplot, id.vars = "id")
     if (experiment == "SWATH"){
       dat.ggplot <- merge(dat.ggplot, design, by.x = "variable", by.y = "Sample.Name")
