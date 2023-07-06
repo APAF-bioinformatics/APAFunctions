@@ -1,4 +1,17 @@
-runAnova <- function(data) {
+#' run ANOVA on data set based on groups
+#'
+#' @param data normalised data frame, row names as protein idenitifiers
+#' @param Group Group information corresponding to the column names in data
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#'
+#' #### NEED TO FIX ####
+#' ## look at TMT.R for more implementation ##
+#'
+runAnova <- function(data, Group) {
   # Create an empty column for threshold status
   anova_results <- as.data.frame(matrix(nrow = nrow(data), ncol = 4))
   colnames(anova_results) <- c("Protein", "obsThreshold", "notes", "Pval")

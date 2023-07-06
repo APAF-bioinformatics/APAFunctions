@@ -1,21 +1,21 @@
 #' Any normalisation of the data matrix applied to APAF data
 #'
-#' @param data_raw The un-normalised raw ion data matrix, as a list
+#' @param data The un-normalised raw ion data matrix, as a list
 #' @param normalisation comes from the --normalisation flag and defaults to "total"
 #' @param Group
 #'
 #' @return
 #'
-normalise <- function(data_raw, normalisation, Group){
+normalise <- function(data, normalisation, Group){
 
   if((grepl("Total", normalisation) == TRUE)) {
-    tot = apply(data_raw, 2, FUN = function(v){sum(na.omit(v))})
-    data <- sweep(data_raw, 2, tot/max(tot), "/")
+    tot = apply(data, 2, FUN = function(v){sum(na.omit(v))})
+    data <- sweep(data, 2, tot/max(tot), "/")
   }
 
   if ((grepl("Median", normalisation) == TRUE)) {
-    tot = apply(data_raw, 2, function(x) median(na.omit(x)))
-    data <- sweep(data_raw, 2, tot/max(tot), "/")
+    tot = apply(data, 2, function(x) median(na.omit(x)))
+    data <- sweep(data, 2, tot/max(tot), "/")
   }
 
   if((grepl("IRS", normalisation) == TRUE)) {
@@ -46,19 +46,18 @@ normalise <- function(data_raw, normalisation, Group){
   if((grepl("MLR", normalisation) == TRUE)) {
 
     Group = as.factor(Group)
-    if (length(Group) != ncol(data_raw)) {stop("Matrix and group sizes don't match for mlr norm.")}
+    if (length(Group) != ncol(data)) {stop("Matrix and group sizes don't match for mlr norm.")}
 
     level.idx = lapply(levels(Group), FUN=function(g){which(Group == g)})
-    norm.list = lapply(level.idx, FUN = function(i){mlrrep(data_raw[,i])})
+    norm.list = lapply(level.idx, FUN = function(i){mlrrep(data[,i])})
 
     # check same colnames?, this could be re-written
-    norm.data = matrix(NA, nrow(data_raw), ncol(data_raw))
-    colnames(norm.data) = colnames(data_raw)
-    rownames(norm.data) = rownames(data_raw)
+    norm.data = matrix(NA, nrow(data), ncol(data))
+    colnames(norm.data) = colnames(data)
+    rownames(norm.data) = rownames(data)
 
     for(i in 1:length(level.idx)) norm.data[,level.idx[[i]]] = as.matrix(norm.list[[i]]$data_norm)
     data <- mlrrep(norm.data)
   }
-
   return(data)
 }
