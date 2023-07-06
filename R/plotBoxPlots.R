@@ -72,7 +72,7 @@ plotBoxPlots <- function(experiment=c("SWATH", "TMT"), dataraw, datanorm, normal
 
   plot <- (p1+p2)/(p3+p4) & theme(legend.position = "bottom")
   png("normalisationQC.png", width = 3000, height = 2000, res = 300)
-  suppressMessages(print(plot + plot_layout(guides = "collect")))
+  suppress_mw(print(plot + plot_layout(guides = "collect")))
   invisible(dev.off())
-  message("Before and after normalisation plots written to normalisationQC.png")
+  message("Before and after normalisation plots written to 'normalisationQC.png'")
 }
