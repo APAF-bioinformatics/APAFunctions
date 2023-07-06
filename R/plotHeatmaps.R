@@ -9,7 +9,7 @@
 #'
 plotHeatmaps <- function(experiment=c("SWATH", "TMT"), data, Group, dist, Anova.idx=NULL, useAnova=FALSE){
   Group <- as.factor(Group)
-  grp_colors = rainbow(nlevels(Group))
+  grp_colors = RColorBrewer::brewer.pal(nlevels(Group), "Set2")
   if (experiment == "TMT") {
     if (useAnova==TRUE) {
       if(nrow(data[Anova.idx,]) > 3) {
@@ -26,7 +26,7 @@ plotHeatmaps <- function(experiment=c("SWATH", "TMT"), data, Group, dist, Anova.
     heatmap3(x, margins=c(8,5), cexRow=1, col=colorRampPalette(c("red", "white", "blue"))(120),
              ColSideColors=grp_colors[Group], main = maintitle, ColSideLabs = NA, labRow = F)
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group), xpd=TRUE,cex=.6)
-    dev.off()
+    invisible(dev.off())
 
   } else if (experiment == "SWATH") {
     if (useAnova == TRUE){
@@ -58,6 +58,6 @@ plotHeatmaps <- function(experiment=c("SWATH", "TMT"), data, Group, dist, Anova.
     heatmap(x, col=colorRampPalette(c("red", "blue"))(120),  margins=c(8,5), cexRow=1, distfun=disfun,
             ColSideColors=grp_colors[Group], main = maintitle, labRow = F)
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group))
-    dev.off()
+    invisible(dev.off())
   }
 }
