@@ -15,7 +15,9 @@ plotBoxPlots <- function(experiment=c("SWATH", "TMT"), dataraw, datanorm, normal
   ldat <- list(dataraw, datanorm)
   for (i in 1:2){
     dat <- ldat[[i]]
+    pdf(file = NULL)
     limmadatin <- limma::plotDensities(log(na.omit(dat+.5)))
+    invisible(dev.off())
     xlimma <- as.data.frame(limmadatin$X)
     ylimma <- as.data.frame(limmadatin$Y)
     colnames(xlimma) <- as.character(colnames(dat))
