@@ -1,80 +1,75 @@
 #' Plotting any APAF boxplots. To be done using ggplot, and take in any experiment type
 #'
 #' @param experiment the experiment type
-#' @param data for TMT this is the ion data matrix
-#' @param normalisation  The types of normalisation from APAFunctions::normalise() should  be listed here, but those are yet to be finalised
-#' @param design the processed design file object that contains labels
-#' @param Group groups that is represented as factors
+#' @param dataraw Data before normalisation
+#' @param datanorm Data after normalisation
+#' @param normalisation  The type(s) of normalisation from APAFunctions::normalise()
+#' @param design The processed design file object that contains labels (TMT)
+#' @param Group Groups representing columns of the data
 #'
 #' @import grid
 #' @import gridBase
 #' @import patchwork
 #'
-plotBoxPlots <- function(experiment=c("SWATH", "TMT"), data, normalisation, design, Group){
-  grp_colors = rainbow(nlevels(Group))
-
-  if (experiment == "SWATH"){
-    png("DataOverall.png", 2000, 2000, res=300)
-    layout(matrix(1:4, nrow=2))
-    APAFunctions::plotRelativeDensities(data, Group, idx=1, main="Relative density ions no norm")
-    # KR - I know normalisation has already been done in the SWATHANOVA.R script, but duplicating here is not too expensive
-    data.norm <- APAFunctions::normalise(experiment, data_raw=data, normalisation, Group)
-    APAFunctions::plotRelativeDensities(data=data.norm, Group, idx=1, main=normalisation)
-    boxplot(log(data), main="Boxplots ions no norm", las=2, pch=20)
-    boxplot(log(data.norm), main=normalisation, las=2, pch=20)
-    dev.off()
-  }
-
-  else if (experiment == "TMT"){
-    # raw and normalised to total ion count
-    # KR - this ggplot is not displaying when running TMT as on the evening 24/05/2023
-
-    # plot limma densities
-    limmadatin <- limma::plotDensities(log(na.omit(data+.5)))
+plotBoxPlots <- function(experiment=c("SWATH", "TMT"), dataraw, datanorm, normalisation, design, Group){
+  ldat <- list(dataraw, datanorm)
+  for (i in 1:2){
+    dat <- ldat[[i]]
+    limmadatin <- limma::plotDensities(log(na.omit(dat+.5)))
     xlimma <- as.data.frame(limmadatin$X)
     ylimma <- as.data.frame(limmadatin$Y)
-    colnames(xlimma) <- as.character(Replicate)
+    colnames(xlimma) <- as.character(colnames(dat))
     colnames(ylimma) <- as.character(Group)
-    xlimma <- melt(xlimma, value.name = "X", variable.name = "Replicate")
-    ylimma <- melt(ylimma, value.name = "Y", variable.name = "Group")
+    xlimma <- suppressMessages(melt(xlimma, value.name = "X", variable.name = "Sample"))
+    ylimma <- suppressMessages(melt(ylimma, value.name = "Y", variable.name = "Group"))
     limmadat <- cbind(xlimma, ylimma)
     head(limmadat)
+    ldat[[i+2]] <- limmadat
 
-    p1 <- ggplot(limmadat, aes(x = X, y = Y, group = Group, col = as.character(Group))) +
-      geom_smooth(se = FALSE) +
-      theme_classic() +
-      theme(text = element_text(size = 14),
-            plot.title = element_text(hjust = 0.5),
-            legend.position = "bottom") +
-      labs(x = "Intensity", y = "Density", title = paste(normalisation, "normalised"),
-           col = "Group")
-    p1
-    dat.ggplot <- data
+    dat.ggplot <- dat
     dat.ggplot$id <- rownames(data)
     dat.ggplot <- melt(dat.ggplot, id.vars = "id")
-    dat.ggplot$Label <- gsub(".*\\.", "", dat.ggplot$variable)
-    dat.ggplot <- merge(dat.ggplot, designLong, by = "Label")
-    dat.ggplot$variable <- factor(dat.ggplot$variable, levels = colnames(data_norm))
-    p2 <- ggplot(dat.ggplot, aes(x = variable, y = log2(value), fill = Group)) +
-      geom_boxplot(show.legend = F) +
-      theme_classic() +
-      theme(axis.text.x = element_text(hjust = 1, angle = 45)) +
-      labs(x = "", y = "")
-
-    #library(patchwork)
-    plot <- p1+p2
-    png("BoxplotDensity_GS.png", width = 3500, height = 1700, res = 300)
-    print(plot)
-    dev.off()
-
-    png("BoxplotDensity.png", width=3500, height=1700,res=300)
-    layout(matrix(1:2, nrow=1))
-    par(mar=c(13,4,4,2)+.1)
-    limma::plotDensities(log(na.omit(data+.5)), col=grp_colors[Group], legend=FALSE, main=paste(normalisation, " normalised"))
-    legend('topright', fill=grp_colors[1:nlevels(Group)], legend=levels(Group))
-    boxplot(log(data[, order(Group)]+.5), las=2, col=grp_colors[Group[order(Group)]],
-            main=paste(normalisation, "and IRS normalised"),
-            cex.axis=0.6)
-    dev.off()
+    if (experiment == "SWATH"){
+      dat.ggplot <- merge(dat.ggplot, design, by.x = "variable", by.y = "Sample.Name")
+    } else if (experiment == "TMT"){
+      dat.ggplot$Label <- gsub(".*\\.", "", dat.ggplot$variable)
+      dat.ggplot <- merge(dat.ggplot, design, by = "Label")
+    }
+    dat.ggplot$variable <- factor(dat.ggplot$variable, levels = colnames(dat))
+    ldat[[i+4]] <- dat.ggplot
   }
+
+  p1 <- ggplot(ldat[[3]], aes(x = X, y = Y, group = Group, col = as.character(Group))) +
+    geom_smooth(se = FALSE) +
+    theme_classic() +
+    theme(text = element_text(size = 14),
+          plot.title = element_text(hjust = 0.5),
+          legend.position = "bottom") +
+    labs(x = "", y = "Density", col = "Group", title = "Pre-normalisation")
+
+  p2 <- ggplot(ldat[[5]], aes(x = variable, y = log2(value), fill = Group)) +
+    geom_boxplot(show.legend = F) +
+    theme_classic() +
+    theme(axis.text.x = element_text(hjust = 1, angle = 45)) +
+    labs(x = "", y = "")
+
+  p3 <- ggplot(ldat[[4]], aes(x = X, y = Y, group = Group, col = as.character(Group))) +
+    geom_smooth(se = FALSE) +
+    theme_classic() +
+    theme(text = element_text(size = 14),
+          plot.title = element_text(hjust = 0.5),
+          legend.position = "bottom") +
+    labs(x = "Intensity", y = "Density", col = "Group",
+         title = paste0("Normalised (", normalisation, ")"))
+
+  p4 <- ggplot(ldat[[6]], aes(x = variable, y = log2(value), fill = Group)) +
+    geom_boxplot(show.legend = F) +
+    theme_classic() +
+    theme(axis.text.x = element_text(hjust = 1, angle = 45)) +
+    labs(x = "", y = "")
+
+  plot <- (p1+p2)/(p3+p4) & theme(legend.position = "bottom")
+  png("normalisationQC.png", width = 3000, height = 2000, res = 300)
+  print(plot + plot_layout(guides = "collect"))
+  dev.off()
 }
