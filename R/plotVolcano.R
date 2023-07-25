@@ -9,14 +9,14 @@
 #' @param FCcutoff  Fold Change cut off. Should be passed in from the script environment, but defaults to 1.5
 #' @param interactive TRUE or FALSE to plot an interactive volcano plot into a HTML file
 #'
-plotVolcano <- function(experiment=c("SWATH", "TMT"), FC, pval, names, PeporProt=c("Peptide", "Protein"), comp.idx, FCcutoff=1.5, pvalcutoff=0.05, saveInteractive = TRUE){
+plotVolcano <- function(experiment=c("SWATH", "TMT"), FC, pval, names, comp.idx, FCcutoff=1.5, pvalcutoff=0.05, saveInteractive = TRUE){
 
-  savename <- paste0(paste0(PeporProt, " volcano plot - comp", comp.idx))
+  savename <- paste0("Volcano plot - comp", comp.idx)
   if (experiment == "TMT"){
     title = paste0("TMT: ", savename)
   } else if (experiment == "SWATH") {
     title = paste0("SWATH: ", savename)
-  } else { title = "We haven't covered this exp yet" }
+  } else { title = "We haven't covered this experiment yet" }
 
   volcdat <- data.frame(FC = log2(FC), pval = pval, names = names)
   #volcdat$annot <- rownames(volcdat)
@@ -32,13 +32,13 @@ plotVolcano <- function(experiment=c("SWATH", "TMT"), FC, pval, names, PeporProt
     xmin <- -FCcutoff
     xmax <- FCcutoff
   }
-  xbreaks <- seq(from = xmin, to = xmax, by = 1)
-  xbreaks <- c(xbreaks, -FCcutoff, FCcutoff)
-  xbreakcol <- c(rep("black", length(xbreaks)-2), "red", "red")
+  #xbreaks <- seq(from = xmin, to = xmax, by = 1)
+  #xbreaks <- c(xbreaks, -FCcutoff, FCcutoff)
+  #xbreakcol <- c(rep("black", length(xbreaks)-2), "red", "red")
   ymax <- ceiling(-log10(summary(volcdat$pval)[1][[1]]))
-  ybreaks <- seq(from = 0, to = ymax, by = 1)
-  ybreaks <- append(ybreaks, -log10(pvalcutoff))
-  ybreakcol <- c(rep("black", length(ybreaks)-1), "red")
+  #ybreaks <- seq(from = 0, to = ymax, by = 1)
+  #ybreaks <- append(ybreaks, -log10(pvalcutoff))
+  #ybreakcol <- c(rep("black", length(ybreaks)-1), "red")
 
   plot <- ggplot(volcdat, aes(x = FC, y = -log10(pval), col = sig, text = names)) +
     geom_point(show.legend = F) +
@@ -50,8 +50,8 @@ plotVolcano <- function(experiment=c("SWATH", "TMT"), FC, pval, names, PeporProt
     geom_vline(xintercept = c(-FCcutoff, FCcutoff), linetype = "dashed", alpha = 0.4, col = "red") +
     scale_color_manual(values = c("no" = "gray70", "yes" = "red")) +
     theme(text = element_text(size = 16),
-          axis.text.x = element_text(color = as.character(xbreakcol)),
-          axis.text.y = element_text(color = as.character(ybreakcol)),
+          #axis.text.x = element_text(color = as.character(xbreakcol)),
+          #axis.text.y = element_text(color = as.character(ybreakcol)),
           plot.title = element_text(hjust = 0.5))
   #labs(x = expression("Fold change (log"[2]*")"), y = expression("-log"[10]~"(p-value)"),
   #     title = title)
