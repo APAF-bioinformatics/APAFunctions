@@ -66,6 +66,5 @@ plotHeatmaps <- function(experiment=c("SWATH", "TMT"), data, Group, dist, Anova.
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group))
     invisible(dev.off())
     message("Heapmap output written to file: ", file)
-    message(distfun)
   }
 }
