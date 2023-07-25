@@ -7,7 +7,12 @@
 #'
 PCA_plot <- function(experiment=c("SWATH", "TMT"), data, pca.components, Group){
 
-  grp_colors = c("#4c93c4", "#ebb145", "#089c74", "#dc7b3b", "#70bfec", "#f3e867", "#d693b8")
+  # STATE OF FUNCTION: works - only aesthetic changes required.
+  # TO DO: PCA 3D plot could potentially be done in ggplot?
+  # colours don't match the rest of the graphs - done through lattice.
+  # --> could they be overwritten? Otherwise leave as is.
+
+  grp_colors = trellis.par.get()$superpose.symbol$col
   z <- pca.components$componentScores
 
   if (experiment == "SWATH"){
