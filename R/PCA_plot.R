@@ -7,7 +7,7 @@
 #'
 PCA_plot <- function(experiment=c("SWATH", "TMT"), data, pca.components, Group){
 
-  grp_colors = rainbow(nlevels(Group))
+  grp_colors = c("#4c93c4", "#ebb145", "#089c74", "#dc7b3b", "#70bfec", "#f3e867", "#d693b8")
   z <- pca.components$componentScores
 
   if (experiment == "SWATH"){
