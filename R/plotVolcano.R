@@ -56,7 +56,7 @@ plotVolcano <- function(experiment=c("SWATH", "TMT"), FC, pval, names, comp.idx,
   #labs(x = expression("Fold change (log"[2]*")"), y = expression("-log"[10]~"(p-value)"),
   #     title = title)
   plotpng <- plot + labs(x = expression("Fold change (log"[2]*")"), y = expression("-log"[10]~"(p-value)"), title = title)
-  plotint <- plot + labs(x = "Fold change (log2)", y = "-log10(p-value)", title = title) + guides(col = FALSE)
+  plotint <- plot + labs(x = "Fold change (log2)", y = "-log10(p-value)", title = title) + guides(col = "none")
 
   png(paste0(savename, ".png"), res = 300, height = 2500, width = 3000)
   print(plotpng)
