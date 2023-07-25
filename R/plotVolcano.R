@@ -43,9 +43,9 @@ plotVolcano <- function(experiment=c("SWATH", "TMT"), FC, pval, names, comp.idx,
   plot <- ggplot(volcdat, aes(x = FC, y = -log10(pval), col = sig, text = names)) +
     geom_point(show.legend = F) +
     theme_classic() +
-    scale_x_continuous(breaks = xbreaks, labels = c(as.integer(xbreaks[1:(length(xbreaks)-2)]), -FCcutoff, FCcutoff), limits = c(xmin,xmax)) +
+    #scale_x_continuous(breaks = xbreaks, labels = c(as.integer(xbreaks[1:(length(xbreaks)-2)]), -FCcutoff, FCcutoff), limits = c(xmin,xmax)) +
     # if pvalcutoff is 0.01 or is same as other break, will be overlapped on graph
-    scale_y_continuous(breaks = ybreaks, labels = c(ybreaks[1:(length(ybreaks)-1)], paste0("(", pvalcutoff, ")")), limits = c(0,ymax)) +
+    #scale_y_continuous(breaks = ybreaks, labels = c(ybreaks[1:(length(ybreaks)-1)], paste0("(", pvalcutoff, ")")), limits = c(0,ymax)) +
     geom_hline(yintercept = -log10(pvalcutoff), linetype = "dashed", alpha = 0.4, col = "red") +
     geom_vline(xintercept = c(-FCcutoff, FCcutoff), linetype = "dashed", alpha = 0.4, col = "red") +
     scale_color_manual(values = c("no" = "gray70", "yes" = "red")) +
