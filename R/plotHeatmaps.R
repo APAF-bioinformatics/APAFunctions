@@ -15,11 +15,13 @@ plotHeatmaps <- function(experiment=c("SWATH", "TMT"), data, Group, dist, Anova.
       if(nrow(data[Anova.idx,]) > 3) {
         x <- as.matrix(na.omit(log(data[Anova.idx,]+.5)))
         maintitle = "TMT - Anova DE Heatmap"
+        file <- "Heatmap - Anova DE.png"
         png("Heatmap - Anova DE.png", 2000, 2000, res = 300)
       }
     } else {
       x <- cor(log(na.omit(data+.5)))
       maintitle = "TMT - IRS Heatmap"
+      file <- "Correlation heatmap IRS.png"
       png("Correlation heatmap IRS.png", 2000, 2000, res = 300)
     }
     par(oma=c(0,0,1,0))
@@ -38,18 +40,22 @@ plotHeatmaps <- function(experiment=c("SWATH", "TMT"), data, Group, dist, Anova.
       disfun <- function(d) as.dist(1 - cor(t(d), use = "pa"))
       if (useAnova == TRUE){
         maintitle = "SWATH - Euclidean heatmap, Anova DE"
+        file <- "Heatmap euclidean - Anova DE.png"
         png("Heatmap euclidean - Anova DE.png", 2000, 2000, res=300)
       } else {
         maintitle = "SWATH - Euclidean heatmap"
+        file <- "Heatmap euclidean - all.png"
         png("Heatmap euclidean - all.png", 2000, 2000, res=300)
       }
     } else if (dist == "cordist") {
       disfun <- function(d) {as.dist((1-cor(t(d)))/2)}
       if (useAnova == TRUE){
         maintitle = "SWATH - Cordist heatmap, Anova DE"
+        file <- "Heatmap cordist - Anova DE.png"
         png("Heatmap cordist - Anova DE.png", 2000, height=2000, res=300)
       } else {
         maintitle = "SWATH - Cordist heatmap"
+        file <- "Heatmap cordist - all.png"
         png("Heatmap cordist - all.png", 2000, height=2000, res=300)
       }
     }
@@ -59,5 +65,6 @@ plotHeatmaps <- function(experiment=c("SWATH", "TMT"), data, Group, dist, Anova.
             ColSideColors=grp_colors[Group], main = maintitle, labRow = F)
     legend("topright", fill=grp_colors[1:nlevels(Group)], legend=levels(Group))
     invisible(dev.off())
+    message("Heapmap output written to file: ", file)
   }
 }
